@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — PixelForge Game Development Studio</title>
+  <meta name="description" content="Start your game project with PixelForge. Send a project brief, book a call, or reach out to our team directly. We respond within 24 hours." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* PAGE HERO */
+    .page-hero { padding: calc(var(--header-h) + 5rem) 0 5rem; position: relative; overflow: hidden; }
+    .page-hero__bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 60% 30%, rgba(180,77,255,0.14) 0%, transparent 60%),
+                  radial-gradient(ellipse 50% 40% at 10% 80%, rgba(0,229,255,0.1) 0%, transparent 60%);
+    }
+    .page-hero__grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(180,77,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(180,77,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridScroll 20s linear infinite;
+    }
+    @keyframes gridScroll { from { background-position: 0 0; } to { background-position: 60px 60px; } }
+    .page-hero__inner { position: relative; z-index: 2; }
+    .page-hero__breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .page-hero__breadcrumb a { color: var(--accent-2); }
+    .page-hero__title { font-family: var(--font-heading); font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .page-hero__title .accent { background: linear-gradient(90deg, var(--neon-violet), var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* CONTACT LAYOUT */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+
+    /* Info Panel */
+    .contact-info-card {
+      background: var(--bg-card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl); padding: 2.5rem; margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-card);
+    }
+    .contact-info-card h3 {
+      font-family: var(--font-heading); font-size: 1.1rem;
+      font-weight: 700; margin-bottom: 1.25rem;
+    }
+    .contact-detail-row {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+    }
+    .contact-detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .contact-detail-icon {
+      width: 40px; height: 40px; border-radius: var(--radius-sm);
+      background: rgba(180,77,255,0.1); border: 1px solid rgba(180,77,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-detail-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.2rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .contact-detail-value { font-size: 0.9rem; font-weight: 500; color: var(--text-primary); }
+    .contact-detail-value a { color: var(--accent-2); transition: color var(--trans); }
+    .contact-detail-value a:hover { color: var(--text-primary); }
+
+    /* Offices */
+    .offices-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .office-card {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 1.25rem;
+      transition: all var(--trans);
+    }
+    .office-card:hover { border-color: var(--accent-2); }
+    .office-flag { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .office-city { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+    .office-role { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* FORM */
+    .contact-form-wrap {
+      background: var(--bg-card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl); padding: 3rem; box-shadow: var(--shadow-card);
+      position: sticky; top: calc(var(--header-h) + 2rem);
+    }
+    .form-section-title {
+      font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .form-section-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 2rem; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    /* Tab switcher inside form */
+    .form-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .form-tab {
+      flex: 1; padding: 0.7rem;
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 600;
+      color: var(--text-muted); cursor: pointer; transition: all var(--trans);
+      font-family: var(--font-body); text-align: center;
+    }
+    .form-tab.active {
+      background: rgba(180,77,255,0.1); border-color: var(--accent-1);
+      color: var(--accent-1);
+    }
+
+    .form-panel { display: none; flex-direction: column; gap: 1rem; }
+    .form-panel.active { display: flex; }
+
+    /* Success message */
+    .form-success {
+      display: none; text-align: center;
+      padding: 2rem; background: rgba(57,255,20,0.06);
+      border: 1px solid rgba(57,255,20,0.2); border-radius: var(--radius-md);
+    }
+    .form-success.visible { display: block; }
+    .form-success__icon { font-size: 3rem; margin-bottom: 1rem; }
+    .form-success__title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .form-success__msg { font-size: 0.9rem; color: var(--text-secondary); }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 0; cursor: pointer; gap: 1rem;
+      font-weight: 600; font-size: 0.95rem;
+      transition: color var(--trans);
+    }
+    .faq-question:hover { color: var(--accent-1); }
+    .faq-chevron {
+      width: 20px; height: 20px; flex-shrink: 0;
+      color: var(--text-muted); transition: transform var(--trans);
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 1.25rem; }
+
+    @media (max-width: 1024px) { .contact-layout { grid-template-columns: 1fr; } .contact-form-wrap { position: static; } }
+    @media (max-width: 768px) { .offices-grid { grid-template-columns: 1fr 1fr; } }
+    [dir="rtl"] .contact-layout { direction: rtl; }
+    [dir="rtl"] .contact-detail-row { direction: rtl; }
+    [dir="rtl"] .faq-question { flex-direction: row-reverse; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"><svg viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/><rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/><rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/><rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/></svg></div>
+        <span class="logo-name">Pixel<span>Forge</span></span>
+      </a>
+      <nav class="main-nav">
+        <div class="nav-item dropdown">
+          <a href="index.html" class="nav-link">Home <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,4 6,8 10,4"/></svg></a>
+          <div class="nav-dropdown">
+            <a href="index.html" class="dropdown-link"><div class="dropdown-link-icon violet">🎮</div><div class="dropdown-meta"><span>Home 1</span><small>Modern Cinematic</small></div></a>
+            <a href="home2.html" class="dropdown-link"><div class="dropdown-link-icon cyan">👾</div><div class="dropdown-meta"><span>Home 2</span><small>Retro Arcade</small></div></a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="about.html" class="nav-link">About</a></div>
+        <div class="nav-item"><a href="services.html" class="nav-link">Services</a></div>
+        <div class="nav-item"><a href="careers.html" class="nav-link">Careers</a></div>
+        <div class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></div>
+      </nav>
+      <div class="header-controls">
+        <button class="ctrl-btn" id="rtl-toggle"><span id="dir-label">LTR</span></button>
+        <button class="ctrl-btn" id="theme-toggle">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm header-cta btn-icon-right">Start a Project <span class="btn-arrow">→</span></a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="page-hero__bg"></div>
+      <div class="page-hero__grid"></div>
+      <div class="container page-hero__inner">
+        <div class="reveal">
+          <div class="page-hero__breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></div>
+          <span class="section-eyebrow">// Get In Touch</span>
+          <h1 class="page-hero__title">Let's Build<br/>Something <span class="accent">Legendary</span></h1>
+          <p style="font-size:1.15rem;color:var(--text-secondary);line-height:1.75;max-width:580px;margin-top:1rem;">Share your game vision with us. Whether it's a complete GDD or just a rough idea scribbled on a napkin — we're ready to help you forge it into something the world will play.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTACT SECTION -->
+    <section class="section" style="padding-top:2rem;">
+      <div class="container">
+        <div class="contact-layout">
+
+          <!-- LEFT — Info -->
+          <div>
+            <!-- Contact Details -->
+            <div class="contact-info-card reveal">
+              <h3>📞 Direct Contact</h3>
+              <div class="contact-detail-row">
+                <div class="contact-detail-icon">📧</div>
+                <div>
+                  <p class="contact-detail-label">Project Enquiries</p>
+                  <p class="contact-detail-value"><a href="mailto:hello@pixelforge.studio">hello@pixelforge.studio</a></p>
+                </div>
+              </div>
+              <div class="contact-detail-row">
+                <div class="contact-detail-icon">💼</div>
+                <div>
+                  <p class="contact-detail-label">Business & Partnerships</p>
+                  <p class="contact-detail-value"><a href="mailto:partners@pixelforge.studio">partners@pixelforge.studio</a></p>
+                </div>
+              </div>
+              <div class="contact-detail-row">
+                <div class="contact-detail-icon">👥</div>
+                <div>
+                  <p class="contact-detail-label">Careers</p>
+                  <p class="contact-detail-value"><a href="mailto:careers@pixelforge.studio">careers@pixelforge.studio</a></p>
+                </div>
+              </div>
+              <div class="contact-detail-row">
+                <div class="contact-detail-icon">📰</div>
+                <div>
+                  <p class="contact-detail-label">Press & Media</p>
+                  <p class="contact-detail-value"><a href="mailto:press@pixelforge.studio">press@pixelforge.studio</a></p>
+                </div>
+              </div>
+              <div class="contact-detail-row">
+                <div class="contact-detail-icon">📞</div>
+                <div>
+                  <p class="contact-detail-label">Phone (US)</p>
+                  <p class="contact-detail-value"><a href="tel:+18005551234">+1 800 555 1234</a></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Response Promise -->
+            <div class="contact-info-card reveal reveal-delay-1" style="background: linear-gradient(135deg, rgba(180,77,255,0.08), rgba(0,229,255,0.05));">
+              <h3>⚡ Our Response Commitment</h3>
+              <div style="display:flex;flex-direction:column;gap:0.85rem;margin-top:0.5rem;">
+                <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--text-secondary);">
+                  <span style="color:var(--neon-green);font-size:1.1rem;">✓</span>
+                  Project enquiries — reply within <strong style="color:var(--text-primary);">24 hours</strong>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--text-secondary);">
+                  <span style="color:var(--neon-green);font-size:1.1rem;">✓</span>
+                  Full proposal — delivered within <strong style="color:var(--text-primary);">5 business days</strong>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--text-secondary);">
+                  <span style="color:var(--neon-green);font-size:1.1rem;">✓</span>
+                  All briefs covered by <strong style="color:var(--text-primary);">mutual NDA</strong> on first contact
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--text-secondary);">
+                  <span style="color:var(--neon-green);font-size:1.1rem;">✓</span>
+                  First concept session is always <strong style="color:var(--text-primary);">free</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Office Locations -->
+            <div class="contact-info-card reveal reveal-delay-2">
+              <h3>🌍 Our Studios</h3>
+              <div class="offices-grid">
+                <div class="office-card">
+                  <div class="office-flag">🏙️</div>
+                  <div class="office-city">San Francisco, CA</div>
+                  <div class="office-role">HQ · Design & Engineering</div>
+                </div>
+                <div class="office-card">
+                  <div class="office-flag">🤠</div>
+                  <div class="office-city">Austin, TX</div>
+                  <div class="office-role">Art Production & QA</div>
+                </div>
+                <div class="office-card">
+                  <div class="office-flag">🗼</div>
+                  <div class="office-city">Tokyo, Japan</div>
+                  <div class="office-role">Porting & Localisation</div>
+                </div>
+                <div class="office-card">
+                  <div class="office-flag">🏰</div>
+                  <div class="office-city">London, UK</div>
+                  <div class="office-role">Audio & Music</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social -->
+            <div class="contact-info-card reveal reveal-delay-3">
+              <h3>🔗 Find Us Online</h3>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.5rem;">
+                <a href="#" style="display:flex;align-items:center;gap:0.75rem;padding:0.85rem 1rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--text-secondary);transition:all var(--trans);font-size:0.88rem;" onmouseover="this.style.borderColor='var(--accent-2)';this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">
+                  <span>𝕏</span> Twitter / X
+                </a>
+                <a href="#" style="display:flex;align-items:center;gap:0.75rem;padding:0.85rem 1rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--text-secondary);transition:all var(--trans);font-size:0.88rem;" onmouseover="this.style.borderColor='var(--accent-2)';this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">
+                  <span>🎮</span> Discord
+                </a>
+                <a href="#" style="display:flex;align-items:center;gap:0.75rem;padding:0.85rem 1rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--text-secondary);transition:all var(--trans);font-size:0.88rem;" onmouseover="this.style.borderColor='var(--accent-2)';this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">
+                  <span>in</span> LinkedIn
+                </a>
+                <a href="#" style="display:flex;align-items:center;gap:0.75rem;padding:0.85rem 1rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--text-secondary);transition:all var(--trans);font-size:0.88rem;" onmouseover="this.style.borderColor='var(--accent-2)';this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">
+                  <span>▶</span> YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT — Form -->
+          <div class="contact-form-wrap reveal reveal-delay-1">
+            <h2 class="form-section-title">Send Us a Brief</h2>
+            <p class="form-section-sub">Choose what type of enquiry you're sending, then fill in the details below.</p>
+
+            <!-- Tab Switcher -->
+            <div class="form-tabs">
+              <button class="form-tab active" data-tab="project" id="tab-project">🎮 Project</button>
+              <button class="form-tab" data-tab="porting" id="tab-porting">🚀 Porting</button>
+              <button class="form-tab" data-tab="general" id="tab-general">💬 General</button>
+            </div>
+
+            <!-- Success -->
+            <div class="form-success" id="form-success">
+              <div class="form-success__icon">🎉</div>
+              <h3 class="form-success__title">Brief Received!</h3>
+              <p class="form-success__msg">Thank you for reaching out. Our creative leads will review your brief and respond within 24 hours. Check your inbox!</p>
+            </div>
+
+            <form class="contact-form" id="contact-form" novalidate>
+              <!-- Shared Fields -->
+              <div class="form-row">
+                <div class="form-field"><label for="ct-name">Full Name *</label><input type="text" id="ct-name" placeholder="Your name" required /></div>
+                <div class="form-field"><label for="ct-email">Email *</label><input type="email" id="ct-email" placeholder="you@studio.com" required /></div>
+              </div>
+              <div class="form-row">
+                <div class="form-field"><label for="ct-company">Company / Studio</label><input type="text" id="ct-company" placeholder="Your studio name" /></div>
+                <div class="form-field"><label for="ct-phone">Phone (optional)</label><input type="tel" id="ct-phone" placeholder="+1 555 000 0000" /></div>
+              </div>
+
+              <!-- PROJECT TAB -->
+              <div class="form-panel active" id="panel-project">
+                <div class="form-field">
+                  <label for="ct-genre">Game Genre / Type *</label>
+                  <select id="ct-genre" required>
+                    <option value="" disabled selected>Select genre</option>
+                    <option>Action / Adventure</option>
+                    <option>Racing</option>
+                    <option>RPG / JRPG</option>
+                    <option>Strategy</option>
+                    <option>Shooter</option>
+                    <option>Puzzle</option>
+                    <option>Sports / Simulation</option>
+                    <option>Horror / Survival</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="ct-platforms">Target Platforms *</label>
+                  <select id="ct-platforms" required>
+                    <option value="" disabled selected>Select primary platform</option>
+                    <option>PC (Steam)</option>
+                    <option>PlayStation 5</option>
+                    <option>Xbox Series X|S</option>
+                    <option>Nintendo Switch</option>
+                    <option>iOS / Android</option>
+                    <option>VR (Meta / PSVR)</option>
+                    <option>Multi-platform</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="ct-budget">Estimated Budget</label>
+                  <select id="ct-budget">
+                    <option value="" disabled selected>Select budget range</option>
+                    <option>$50k – $100k</option>
+                    <option>$100k – $250k</option>
+                    <option>$250k – $500k</option>
+                    <option>$500k – $1M+</option>
+                    <option>Prefer to discuss</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="ct-brief">Project Brief *</label>
+                  <textarea id="ct-brief" rows="5" placeholder="Describe your game concept, any existing assets, your target audience, and timeline expectations..." required></textarea>
+                </div>
+              </div>
+
+              <!-- PORTING TAB -->
+              <div class="form-panel" id="panel-porting">
+                <div class="form-field">
+                  <label for="ct-current-platform">Current Platform</label>
+                  <select id="ct-current-platform">
+                    <option value="" disabled selected>Where is the game now?</option>
+                    <option>PC (Steam)</option>
+                    <option>PlayStation 4/5</option>
+                    <option>Xbox One / Series</option>
+                    <option>iOS / Android</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="ct-target-platform">Target Platform(s) *</label>
+                  <select id="ct-target-platform" required>
+                    <option value="" disabled selected>Where should it go?</option>
+                    <option>PlayStation 5</option>
+                    <option>Xbox Series X|S</option>
+                    <option>Nintendo Switch</option>
+                    <option>iOS</option>
+                    <option>Android</option>
+                    <option>Multiple Platforms</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="ct-engine">Game Engine Used</label>
+                  <input type="text" id="ct-engine" placeholder="e.g. Unreal Engine 5, Unity, Godot..." />
+                </div>
+                <div class="form-field">
+                  <label for="ct-port-brief">Porting Details *</label>
+                  <textarea id="ct-port-brief" rows="5" placeholder="Tell us about your game's scope, genre, team size, existing codebase status, and timeline..." required></textarea>
+                </div>
+              </div>
+
+              <!-- GENERAL TAB -->
+              <div class="form-panel" id="panel-general">
+                <div class="form-field">
+                  <label for="ct-subject">Subject *</label>
+                  <select id="ct-subject" required>
+                    <option value="" disabled selected>What is this about?</option>
+                    <option>Partnership / Co-dev</option>
+                    <option>Press & Media Enquiry</option>
+                    <option>Speaking / Events</option>
+                    <option>Investor Relations</option>
+                    <option>General Question</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="ct-message">Message *</label>
+                  <textarea id="ct-message" rows="8" placeholder="Tell us what's on your mind..." required></textarea>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full btn-icon-right" id="contact-submit">
+                Send Brief <span class="btn-arrow">→</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--alt">
+      <div class="container" style="max-width:800px;">
+        <div style="text-align:center;margin-bottom:3rem;" class="reveal">
+          <span class="section-eyebrow">// FAQs</span>
+          <h2 class="section-heading">Common Questions</h2>
+        </div>
+        <div class="faq-list reveal reveal-delay-1">
+          <div class="faq-item">
+            <div class="faq-question">
+              How long does a typical project take?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+            <div class="faq-answer">Timelines vary significantly by scope. A mobile indie title typically takes 8–14 months. A PC/console AA project runs 18–36 months. Console porting for a single platform typically takes 4–8 months depending on the game's complexity and certification requirements. We'll give you a realistic estimate during the discovery phase.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Do you sign NDAs before discussing a project?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+            <div class="faq-answer">Absolutely. We sign a mutual NDA before any detailed project discussion begins. Your intellectual property is sacred. We take confidentiality seriously and our NDA process is fast — usually signed the same day.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              What is the minimum project size you accept?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+            <div class="faq-answer">Our minimum engagement size is $50,000 for full development projects and $15,000 for porting work. For art-only or audio-only engagements, we scope on a case-by-case basis. We're happy to work with indie studios — we were one ourselves.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Do you retain any IP rights on games you develop?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+            <div class="faq-answer">No. All IP created during a client engagement belongs entirely to you. We work on a work-for-hire basis. You own 100% of the game, code, assets, and everything we produce together. This is non-negotiable for us.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Can I see examples of your past work?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+            <div class="faq-answer">Yes. Our public portfolio includes all published titles on the Games page. For client work under NDA, we can share case studies privately after signing an NDA with you. Just mention this in your enquiry and we'll arrange it during our first call.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Do you offer post-launch support and live ops?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+            </div>
+            <div class="faq-answer">Yes — it's one of our core service offerings. We can provide dedicated post-launch teams for bug fixes, patch deployment, DLC production, seasonal content, live events, and ongoing performance optimisation. We'll scope this as part of your initial agreement.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><div class="logo-mark" style="width:32px;height:32px;"><svg viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/><rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/><rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/><rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/></svg></div><span class="logo-name">Pixel<span>Forge</span></span></a>
+          <p>A premium game development studio crafting bold, immersive experiences since 2018.</p>
+          <div class="footer-social"><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">🎮</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">▶</a></div>
+        </div>
+        <div class="footer-col"><h4>Studio</h4><a href="about.html">About Us</a><a href="careers.html">Careers</a><a href="#">Press Kit</a></div>
+        <div class="footer-col"><h4>Work</h4><a href="index.html#games">All Games</a><a href="services.html">Services</a><a href="#">Awards</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="mailto:hello@pixelforge.studio">hello@pixelforge.studio</a><a href="tel:+18005551234">+1 800 555 1234</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 PixelForge Game Studio. All rights reserved.</p>
+        <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+        <span class="footer-pixel-sig">Made with 8-bit love ❤️</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Form tab switcher
+    const formTabs = document.querySelectorAll('.form-tab');
+    const formPanels = document.querySelectorAll('.form-panel');
+    formTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        formTabs.forEach(t => t.classList.remove('active'));
+        formPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = document.getElementById('panel-' + tab.getAttribute('data-tab'));
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    // Contact form submit
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    if (contactForm) {
+      contactForm.addEventListener('submit', e => {
+        e.preventDefault();
+        contactForm.style.display = 'none';
+        formSuccess.classList.add('visible');
+      });
+    }
+
+    // FAQ accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        faqItems.forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>

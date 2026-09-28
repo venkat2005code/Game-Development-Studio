@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — PixelForge Game Development Studio</title>
+  <meta name="description" content="PixelForge services: Custom game development, console porting, art production, audio, co-development, and live ops. End-to-end game studio services." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* PAGE HERO */
+    .page-hero { padding: calc(var(--header-h) + 5rem) 0 5rem; position: relative; overflow: hidden; }
+    .page-hero__bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 20% 40%, rgba(0,229,255,0.1) 0%, transparent 60%),
+                  radial-gradient(ellipse 50% 40% at 90% 70%, rgba(180,77,255,0.1) 0%, transparent 60%);
+    }
+    .page-hero__grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero__inner { position: relative; z-index: 2; }
+    .page-hero__breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .page-hero__breadcrumb a { color: var(--accent-2); transition: color var(--trans); }
+    .page-hero__breadcrumb a:hover { color: var(--text-primary); }
+    .page-hero__title { font-family: var(--font-heading); font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .page-hero__title .accent { background: linear-gradient(90deg, var(--neon-cyan), var(--neon-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* SERVICE DETAIL CARD */
+    .service-detail {
+      display: grid; grid-template-columns: 1fr 1.5fr;
+      gap: 0; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--radius-xl);
+      overflow: hidden; transition: all var(--trans);
+    }
+    .service-detail:hover { border-color: var(--accent-1); box-shadow: var(--shadow-card); }
+    .service-detail + .service-detail { margin-top: 1.5rem; }
+    .service-detail.reverse { direction: rtl; }
+    .service-detail.reverse > * { direction: ltr; }
+    .service-detail__media {
+      background: var(--bg-subtle);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem; padding: 3rem 2rem;
+      font-family: var(--font-pixel); font-size: 0.55rem;
+      color: var(--text-muted); text-align: center;
+      min-height: 320px; position: relative; overflow: hidden;
+    }
+    .service-detail__media-art { font-size: 4rem; z-index: 1; filter: drop-shadow(0 0 20px var(--accent-1)); }
+    .service-detail__media-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(180,77,255,0.12) 0%, transparent 70%);
+    }
+    .service-detail__media p { z-index: 1; }
+    .service-detail__body { padding: 3rem; }
+    .service-detail__number {
+      font-family: var(--font-pixel); font-size: 0.55rem;
+      color: var(--neon-cyan); letter-spacing: 0.12em; margin-bottom: 1rem;
+    }
+    .service-detail__name { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem; }
+    .service-detail__desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.75rem; }
+    .service-detail__features { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
+    .feature-row {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.88rem; color: var(--text-secondary);
+    }
+    .feature-row::before {
+      content: '▸'; color: var(--accent-2);
+      font-size: 0.75rem; flex-shrink: 0;
+    }
+    .service-detail__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .s-tag {
+      font-size: 0.75rem; padding: 0.3rem 0.75rem;
+      background: var(--bg-subtle); border: 1px solid var(--border);
+      border-radius: 4px; color: var(--text-muted);
+    }
+
+    /* PROCESS STEPS */
+    .process-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+    .process-grid::before {
+      content: ''; position: absolute;
+      top: 28px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(to right, var(--neon-violet), var(--neon-cyan));
+      z-index: 0;
+    }
+    .process-step { text-align: center; position: relative; z-index: 1; padding: 0 0.5rem; }
+    .process-step__dot {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--bg-card); border: 2px solid var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem; font-size: 1.25rem;
+      transition: all var(--trans);
+      box-shadow: var(--shadow-sm);
+    }
+    .process-step:hover .process-step__dot {
+      border-color: var(--accent-1); box-shadow: var(--glow-violet);
+      transform: scale(1.1);
+    }
+    .process-step__num {
+      font-family: var(--font-pixel); font-size: 0.45rem;
+      color: var(--accent-2); margin-bottom: 0.5rem;
+    }
+    .process-step__label { font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .process-step__sub { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* TECH STACK */
+    .tech-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+    .tech-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 1.25rem 0.75rem;
+      text-align: center; transition: all var(--trans);
+    }
+    .tech-card:hover { border-color: var(--accent-2); transform: translateY(-3px); box-shadow: var(--glow-cyan); }
+    .tech-card__icon { font-size: 1.75rem; margin-bottom: 0.6rem; }
+    .tech-card__name { font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); }
+
+    /* PRICING */
+    .pricing-note {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 3rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    .pricing-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius-md); margin-bottom: 0.75rem;
+    }
+    .pricing-item:last-child { margin-bottom: 0; }
+    .pricing-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .pricing-label { font-size: 0.88rem; color: var(--text-secondary); }
+    .pricing-value { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
+
+    @media (max-width: 1024px) { .tech-grid { grid-template-columns: repeat(3, 1fr); } .process-grid { grid-template-columns: repeat(3, 1fr); } .process-grid::before { display: none; } }
+    @media (max-width: 768px) { .service-detail { grid-template-columns: 1fr; } .service-detail.reverse { direction: ltr; } .pricing-note { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } .tech-grid { grid-template-columns: repeat(3, 1fr); } }
+    [dir="rtl"] .page-hero__inner { direction: rtl; }
+    [dir="rtl"] .service-detail { direction: rtl; }
+    [dir="rtl"] .service-detail.reverse { direction: ltr; }
+    [dir="rtl"] .feature-row::before { content: '◂'; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"><svg viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/><rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/><rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/><rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/></svg></div>
+        <span class="logo-name">Pixel<span>Forge</span></span>
+      </a>
+      <nav class="main-nav">
+        <div class="nav-item dropdown">
+          <a href="index.html" class="nav-link">Home <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,4 6,8 10,4"/></svg></a>
+          <div class="nav-dropdown">
+            <a href="index.html" class="dropdown-link"><div class="dropdown-link-icon violet">🎮</div><div class="dropdown-meta"><span>Home 1</span><small>Modern Cinematic</small></div></a>
+            <a href="home2.html" class="dropdown-link"><div class="dropdown-link-icon cyan">👾</div><div class="dropdown-meta"><span>Home 2</span><small>Retro Arcade</small></div></a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="about.html" class="nav-link">About</a></div>
+        <div class="nav-item"><a href="services.html" class="nav-link active">Services</a></div>
+        <div class="nav-item"><a href="careers.html" class="nav-link">Careers</a></div>
+        <div class="nav-item"><a href="contact.html" class="nav-link">Contact</a></div>
+      </nav>
+      <div class="header-controls">
+        <button class="ctrl-btn" id="rtl-toggle"><span id="dir-label">LTR</span></button>
+        <button class="ctrl-btn" id="theme-toggle">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm header-cta btn-icon-right">Start a Project <span class="btn-arrow">→</span></a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="page-hero__bg"></div>
+      <div class="page-hero__grid"></div>
+      <div class="container page-hero__inner">
+        <div class="reveal">
+          <div class="page-hero__breadcrumb"><a href="index.html">Home</a><span>/</span><span>Services</span></div>
+          <span class="section-eyebrow">// What We Build</span>
+          <h1 class="page-hero__title">From Concept<br/>to <span class="accent">Gold Master</span></h1>
+          <p style="font-size:1.15rem;color:var(--text-secondary);line-height:1.75;max-width:600px;">Every service we offer is engineered around a single goal: shipping remarkable games that players remember. Whether you're starting from scratch or scaling an existing IP — we have the team for it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES DETAIL -->
+    <section class="section">
+      <div class="container">
+        <div class="service-detail reveal">
+          <div class="service-detail__media">
+            <div class="service-detail__media-glow"></div>
+            <div class="service-detail__media-art">🎮</div>
+            <p>[Service Illustration Placeholder]</p>
+          </div>
+          <div class="service-detail__body">
+            <p class="service-detail__number">// 01 — Core Service</p>
+            <h2 class="service-detail__name">Custom Game Development</h2>
+            <p class="service-detail__desc">Full-cycle game production from pre-production through gold master delivery. We handle creative direction, engineering, QA, and launch strategy — all under one roof with one accountable team.</p>
+            <div class="service-detail__features">
+              <div class="feature-row">Concept development and Game Design Document (GDD) creation</div>
+              <div class="feature-row">Unreal Engine 5, Unity, Godot, and proprietary engine support</div>
+              <div class="feature-row">Multiplayer architecture, netcode, and live-service infrastructure</div>
+              <div class="feature-row">Closed alpha / beta testing and community feedback loops</div>
+              <div class="feature-row">Launch strategy, platform submission, and day-one support</div>
+            </div>
+            <div class="service-detail__tags">
+              <span class="s-tag">Unreal 5</span><span class="s-tag">Unity</span><span class="s-tag">Godot</span>
+              <span class="s-tag">Multiplayer</span><span class="s-tag">Live Service</span><span class="s-tag">PC / Console</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-detail reverse reveal">
+          <div class="service-detail__media">
+            <div class="service-detail__media-glow"></div>
+            <div class="service-detail__media-art">🚀</div>
+            <p>[Porting Illustration Placeholder]</p>
+          </div>
+          <div class="service-detail__body">
+            <p class="service-detail__number">// 02 — Porting</p>
+            <h2 class="service-detail__name">Console & Platform Porting</h2>
+            <p class="service-detail__desc">Expert porting to PlayStation 5, Xbox Series X|S, Nintendo Switch, iOS, and Android. Our Tokyo team has a 100% platform certification pass rate on first submission — no delays, no costly resubmissions.</p>
+            <div class="service-detail__features">
+              <div class="feature-row">Performance profiling and hardware-specific optimization</div>
+              <div class="feature-row">Platform SDK integration (PSN, Xbox Live, Nintendo Online)</div>
+              <div class="feature-row">Trophy / Achievement system implementation</div>
+              <div class="feature-row">ESRB / PEGI / CERO rating submission support</div>
+              <div class="feature-row">Localisation and regional compliance handling</div>
+            </div>
+            <div class="service-detail__tags">
+              <span class="s-tag">PS5</span><span class="s-tag">Xbox Series</span><span class="s-tag">Nintendo Switch</span>
+              <span class="s-tag">iOS</span><span class="s-tag">Android</span><span class="s-tag">Certification</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-detail reveal">
+          <div class="service-detail__media">
+            <div class="service-detail__media-glow"></div>
+            <div class="service-detail__media-art">🎨</div>
+            <p>[Art Samples Placeholder]</p>
+          </div>
+          <div class="service-detail__body">
+            <p class="service-detail__number">// 03 — Art & Asset</p>
+            <h2 class="service-detail__name">Art & Asset Production</h2>
+            <p class="service-detail__desc">World-class 2D and 3D art production spanning every discipline. From nostalgic 8-bit pixel art to hyper-realistic Nanite-powered environments — our 40-person art team covers it all.</p>
+            <div class="service-detail__features">
+              <div class="feature-row">Character design, rigging, and full animation pipelines</div>
+              <div class="feature-row">Environment art: modular kits, hero props, and biome builds</div>
+              <div class="feature-row">UI/UX design systems and HUD implementation</div>
+              <div class="feature-row">VFX: particle systems, shader development, post-processing</div>
+              <div class="feature-row">Pixel art: sprites, tilesets, and cutscene artwork</div>
+            </div>
+            <div class="service-detail__tags">
+              <span class="s-tag">3D Modelling</span><span class="s-tag">Pixel Art</span><span class="s-tag">VFX</span>
+              <span class="s-tag">UI Design</span><span class="s-tag">Rigging</span><span class="s-tag">Nanite</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-detail reverse reveal">
+          <div class="service-detail__media">
+            <div class="service-detail__media-glow"></div>
+            <div class="service-detail__media-art">🔊</div>
+            <p>[Audio Studio Placeholder]</p>
+          </div>
+          <div class="service-detail__body">
+            <p class="service-detail__number">// 04 — Audio</p>
+            <h2 class="service-detail__name">Audio & Music Production</h2>
+            <p class="service-detail__desc">Our London audio team crafts the sonic worlds your game deserves. From sweeping orchestral scores to procedural 8-bit chiptune systems — we compose, implement, and mix to professional broadcast standard.</p>
+            <div class="service-detail__features">
+              <div class="feature-row">Original score composition and full orchestral recording</div>
+              <div class="feature-row">Adaptive music systems (Wwise, FMOD)</div>
+              <div class="feature-row">Custom SFX design and implementation</div>
+              <div class="feature-row">Voice acting direction and casting</div>
+              <div class="feature-row">Audio mix and mastering for all target platforms</div>
+            </div>
+            <div class="service-detail__tags">
+              <span class="s-tag">Wwise</span><span class="s-tag">FMOD</span><span class="s-tag">Orchestral</span>
+              <span class="s-tag">Chiptune</span><span class="s-tag">SFX</span><span class="s-tag">Voice Acting</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-detail reveal">
+          <div class="service-detail__media">
+            <div class="service-detail__media-glow"></div>
+            <div class="service-detail__media-art">📡</div>
+            <p>[Live Ops Dashboard Placeholder]</p>
+          </div>
+          <div class="service-detail__body">
+            <p class="service-detail__number">// 05 — Co-Dev & Live Ops</p>
+            <h2 class="service-detail__name">Co-development & Live Operations</h2>
+            <p class="service-detail__desc">Embed our specialist teams within your studio. We supplement capacity for live-service titles, DLC production, seasonal events, content updates, and post-launch optimisation.</p>
+            <div class="service-detail__features">
+              <div class="feature-row">Dedicated sub-teams that integrate with your workflows</div>
+              <div class="feature-row">DLC and expansion pack production</div>
+              <div class="feature-row">Seasonal events, battle passes, and content calendars</div>
+              <div class="feature-row">Backend infrastructure: servers, analytics, anti-cheat</div>
+              <div class="feature-row">Post-launch performance and crash optimisation</div>
+            </div>
+            <div class="service-detail__tags">
+              <span class="s-tag">DLC</span><span class="s-tag">Live Service</span><span class="s-tag">Battle Pass</span>
+              <span class="s-tag">Backend</span><span class="s-tag">Analytics</span><span class="s-tag">Anti-Cheat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR PROCESS -->
+    <section class="section section--alt">
+      <div class="container">
+        <div style="text-align:center;max-width:560px;margin:0 auto 4rem;" class="reveal">
+          <span class="section-eyebrow">// How We Work</span>
+          <h2 class="section-heading">Our Development Process</h2>
+          <p class="section-subheading" style="margin:0 auto;">Transparent, iterative, and built around your goals. Here's how every PixelForge project runs.</p>
+        </div>
+        <div class="process-grid reveal reveal-delay-1">
+          <div class="process-step">
+            <div class="process-step__dot">💡</div>
+            <p class="process-step__num">01</p>
+            <h4 class="process-step__label">Discovery</h4>
+            <p class="process-step__sub">Brief, NDA, scope definition, and feasibility study.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__dot">📐</div>
+            <p class="process-step__num">02</p>
+            <h4 class="process-step__label">Pre-Production</h4>
+            <p class="process-step__sub">GDD, prototypes, art direction, and milestone planning.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__dot">⚙️</div>
+            <p class="process-step__num">03</p>
+            <h4 class="process-step__label">Production</h4>
+            <p class="process-step__sub">Iterative sprints, regular builds, and weekly check-ins.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__dot">🧪</div>
+            <p class="process-step__num">04</p>
+            <h4 class="process-step__label">QA & Cert</h4>
+            <p class="process-step__sub">Full QA pass, platform certification, and bug fix sprint.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__dot">🚀</div>
+            <p class="process-step__num">05</p>
+            <h4 class="process-step__label">Launch</h4>
+            <p class="process-step__sub">Gold master, submission, day-one monitoring & support.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="section">
+      <div class="container">
+        <div style="text-align:center;max-width:560px;margin:0 auto 3.5rem;" class="reveal">
+          <span class="section-eyebrow">// Technology</span>
+          <h2 class="section-heading">Our Tech Stack</h2>
+        </div>
+        <div class="tech-grid reveal reveal-delay-1">
+          <div class="tech-card"><div class="tech-card__icon">🎮</div><div class="tech-card__name">Unreal 5</div></div>
+          <div class="tech-card"><div class="tech-card__icon">🕹️</div><div class="tech-card__name">Unity</div></div>
+          <div class="tech-card"><div class="tech-card__icon">🐦</div><div class="tech-card__name">Godot</div></div>
+          <div class="tech-card"><div class="tech-card__icon">🔊</div><div class="tech-card__name">Wwise</div></div>
+          <div class="tech-card"><div class="tech-card__icon">🎵</div><div class="tech-card__name">FMOD</div></div>
+          <div class="tech-card"><div class="tech-card__icon">🎨</div><div class="tech-card__name">Substance 3D</div></div>
+          <div class="tech-card"><div class="tech-card__icon">✏️</div><div class="tech-card__name">Maya / Blender</div></div>
+          <div class="tech-card"><div class="tech-card__icon">📐</div><div class="tech-card__name">Figma</div></div>
+          <div class="tech-card"><div class="tech-card__icon">🔧</div><div class="tech-card__name">Perforce</div></div>
+          <div class="tech-card"><div class="tech-card__icon">🖥️</div><div class="tech-card__name">C++ / C#</div></div>
+          <div class="tech-card"><div class="tech-card__icon">☁️</div><div class="tech-card__name">AWS GameLift</div></div>
+          <div class="tech-card"><div class="tech-card__icon">📊</div><div class="tech-card__name">GameAnalytics</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section section--alt">
+      <div class="container">
+        <div style="max-width:580px;margin-bottom:3.5rem;" class="reveal">
+          <span class="section-eyebrow">// Investment</span>
+          <h2 class="section-heading">How Pricing Works</h2>
+          <p class="section-subheading">We don't believe in one-size-fits-all tiers. Every project is scoped individually based on complexity, team size, and timeline.</p>
+        </div>
+        <div class="pricing-note reveal reveal-delay-1">
+          <div>
+            <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.8;margin-bottom:2rem;">Every project starts with a free discovery call where we understand your needs and provide a tailored statement of work. No surprise invoices. No scope creep.</p>
+            <div class="pricing-item"><span class="pricing-icon">🎮</span><div><div class="pricing-label">Custom Game Development</div><div class="pricing-value">From $50,000</div></div></div>
+            <div class="pricing-item"><span class="pricing-icon">🚀</span><div><div class="pricing-label">Console Porting (per platform)</div><div class="pricing-value">From $15,000</div></div></div>
+            <div class="pricing-item"><span class="pricing-icon">🎨</span><div><div class="pricing-label">Art & Asset Production</div><div class="pricing-value">Custom Quote</div></div></div>
+            <div class="pricing-item"><span class="pricing-icon">📡</span><div><div class="pricing-label">Co-development / Live Ops</div><div class="pricing-value">Team Day Rate</div></div></div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:4rem;margin-bottom:1.5rem;">💬</div>
+            <h3 style="font-family:var(--font-heading);font-size:1.5rem;font-weight:800;margin-bottom:1rem;">Not sure which service you need?</h3>
+            <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:2rem;line-height:1.7;">Book a free 30-minute discovery call with our team leads. We'll review your project and recommend the right path forward — no obligations.</p>
+            <a href="contact.html" class="btn btn-primary btn-icon-right">Book Free Consultation <span class="btn-arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section final-cta">
+      <div class="final-cta__bg"></div>
+      <div class="final-cta__bg-art"></div>
+      <div class="container">
+        <div class="final-cta__content reveal">
+          <span class="final-cta__icon">🚀</span>
+          <h2 class="final-cta__heading">Ready to Build<br/><span>Something Legendary?</span></h2>
+          <p class="final-cta__desc">Send us your project brief. We'll read it carefully and respond with a tailored proposal within 24 hours.</p>
+          <div class="final-cta__actions">
+            <a href="contact.html" class="btn btn-primary btn-lg btn-icon-right">Send Project Brief <span class="btn-arrow">→</span></a>
+            <a href="about.html" class="btn btn-outline btn-lg">Learn About Us</a>
+          </div>
+          <div class="final-cta__perks">
+            <span class="final-cta__perk"><span class="perk-dot"></span>NDA on first contact</span>
+            <span class="final-cta__perk"><span class="perk-dot"></span>Free concept review</span>
+            <span class="final-cta__perk"><span class="perk-dot"></span>Reply within 24hrs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><div class="logo-mark" style="width:32px;height:32px;"><svg viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/><rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/><rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/><rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/></svg></div><span class="logo-name">Pixel<span>Forge</span></span></a>
+          <p>A premium game development studio crafting bold, immersive experiences since 2018.</p>
+          <div class="footer-social"><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">🎮</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">▶</a></div>
+        </div>
+        <div class="footer-col"><h4>Studio</h4><a href="about.html">About Us</a><a href="careers.html">Careers</a><a href="#">Press Kit</a><a href="#">Partners</a></div>
+        <div class="footer-col"><h4>Work</h4><a href="index.html#games">All Games</a><a href="services.html">Services</a><a href="#">Case Studies</a><a href="#">Awards</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="mailto:hello@pixelforge.studio">hello@pixelforge.studio</a><a href="tel:+18005551234">+1 800 555 1234</a><a href="#">San Francisco, CA</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 PixelForge Game Studio. All rights reserved.</p>
+        <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+        <span class="footer-pixel-sig">Made with 8-bit love ❤️</span>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

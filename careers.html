@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers — PixelForge Game Development Studio</title>
+  <meta name="description" content="Join PixelForge — a premium game development studio. Open roles in game design, engineering, art, audio, QA, and more. Remote-friendly and creatively driven." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* PAGE HERO */
+    .page-hero { padding: calc(var(--header-h) + 5rem) 0 5rem; position: relative; overflow: hidden; }
+    .page-hero__bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 20%, rgba(255,45,120,0.1) 0%, transparent 60%),
+                  radial-gradient(ellipse 50% 40% at 80% 80%, rgba(180,77,255,0.1) 0%, transparent 60%);
+    }
+    .page-hero__grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,45,120,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,45,120,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 5rem; }
+    .page-hero__breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .page-hero__breadcrumb a { color: var(--accent-2); }
+    .page-hero__title { font-family: var(--font-heading); font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .page-hero__title .accent { background: linear-gradient(90deg, var(--neon-pink), var(--neon-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-hero__desc { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.75; max-width: 480px; margin-bottom: 2rem; }
+
+    /* PERKS */
+    .perks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    .perk-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 2rem 1.5rem; text-align: center;
+      transition: all var(--trans);
+    }
+    .perk-card:hover { border-color: var(--neon-pink); transform: translateY(-4px); box-shadow: var(--glow-pink); }
+    .perk-card__icon { font-size: 2rem; margin-bottom: 1rem; }
+    .perk-card__name { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .perk-card__desc { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.65; }
+
+    /* JOB LISTINGS */
+    .jobs-layout { display: grid; grid-template-columns: 260px 1fr; gap: 2.5rem; align-items: start; }
+    .jobs-filter { position: sticky; top: calc(var(--header-h) + 1.5rem); }
+    .jobs-filter-title { font-family: var(--font-pixel); font-size: 0.5rem; color: var(--neon-cyan); letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .dept-filter-list { display: flex; flex-direction: column; gap: 0.4rem; }
+    .dept-btn {
+      width: 100%; text-align: left; padding: 0.75rem 1rem;
+      background: transparent; border: 1px solid transparent;
+      border-radius: var(--radius-sm); font-size: 0.88rem;
+      color: var(--text-secondary); cursor: pointer;
+      transition: all var(--trans); font-family: var(--font-body);
+    }
+    .dept-btn:hover, .dept-btn.active {
+      background: var(--bg-hover); color: var(--text-primary);
+      border-color: var(--border);
+    }
+    .dept-btn.active { color: var(--accent-1); border-color: rgba(180,77,255,0.3); background: rgba(180,77,255,0.07); }
+    .dept-count { float: right; font-size: 0.75rem; color: var(--text-muted); background: var(--bg-subtle); padding: 0.1rem 0.45rem; border-radius: 50px; }
+
+    .jobs-list { display: flex; flex-direction: column; gap: 1rem; }
+    .job-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.75rem 2rem;
+      transition: all var(--trans); cursor: pointer;
+      display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center;
+    }
+    .job-card:hover { border-color: var(--accent-1); transform: translateX(4px); box-shadow: var(--shadow-card); }
+    .job-card__dept {
+      font-family: var(--font-pixel); font-size: 0.45rem;
+      color: var(--neon-pink); letter-spacing: 0.1em; margin-bottom: 0.4rem;
+    }
+    .job-card__title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .job-card__meta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .job-meta-item { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.3rem; }
+    .job-card__actions { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+    .job-badge { padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.72rem; font-weight: 600; background: rgba(57,255,20,0.1); color: var(--neon-green); border: 1px solid rgba(57,255,20,0.25); }
+    .job-badge.contract { background: rgba(0,229,255,0.1); color: var(--neon-cyan); border-color: rgba(0,229,255,0.25); }
+
+    /* CULTURE SECTION */
+    .culture-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .culture-card {
+      border-radius: var(--radius-lg); overflow: hidden;
+      background: var(--bg-card); border: 1px solid var(--border);
+      transition: all var(--trans);
+    }
+    .culture-card:hover { border-color: var(--border-strong); transform: translateY(-4px); box-shadow: var(--shadow-card); }
+    .culture-card__img {
+      height: 180px; background: var(--bg-subtle);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .culture-card__body { padding: 1.5rem; }
+    .culture-card__title { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .culture-card__desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; }
+
+    /* APPLICATION FORM */
+    .apply-form-wrap {
+      background: var(--bg-card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl); padding: 3rem; box-shadow: var(--shadow-card);
+    }
+    .apply-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    @media (max-width: 1024px) { .perks-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .page-hero__inner { grid-template-columns: 1fr; }
+      .jobs-layout { grid-template-columns: 1fr; }
+      .jobs-filter { position: static; }
+      .dept-filter-list { flex-direction: row; flex-wrap: wrap; }
+      .dept-btn { width: auto; }
+      .culture-grid { grid-template-columns: 1fr; }
+      .job-card { grid-template-columns: 1fr; }
+      .job-card__actions { align-items: flex-start; }
+      .perks-grid { grid-template-columns: 1fr 1fr; }
+    }
+    [dir="rtl"] .page-hero__inner { direction: rtl; }
+    [dir="rtl"] .jobs-layout { direction: rtl; }
+    [dir="rtl"] .job-card:hover { transform: translateX(-4px); }
+    [dir="rtl"] .dept-btn { text-align: right; }
+    [dir="rtl"] .dept-count { float: left; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark"><svg viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/><rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/><rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/><rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/></svg></div>
+        <span class="logo-name">Pixel<span>Forge</span></span>
+      </a>
+      <nav class="main-nav">
+        <div class="nav-item dropdown">
+          <a href="index.html" class="nav-link">Home <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,4 6,8 10,4"/></svg></a>
+          <div class="nav-dropdown">
+            <a href="index.html" class="dropdown-link"><div class="dropdown-link-icon violet">🎮</div><div class="dropdown-meta"><span>Home 1</span><small>Modern Cinematic</small></div></a>
+            <a href="home2.html" class="dropdown-link"><div class="dropdown-link-icon cyan">👾</div><div class="dropdown-meta"><span>Home 2</span><small>Retro Arcade</small></div></a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="about.html" class="nav-link">About</a></div>
+        <div class="nav-item"><a href="services.html" class="nav-link">Services</a></div>
+        <div class="nav-item"><a href="careers.html" class="nav-link active">Careers</a></div>
+        <div class="nav-item"><a href="contact.html" class="nav-link">Contact</a></div>
+      </nav>
+      <div class="header-controls">
+        <button class="ctrl-btn" id="rtl-toggle"><span id="dir-label">LTR</span></button>
+        <button class="ctrl-btn" id="theme-toggle">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm header-cta btn-icon-right">Start a Project <span class="btn-arrow">→</span></a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="page-hero__bg"></div>
+      <div class="page-hero__grid"></div>
+      <div class="container page-hero__inner">
+        <div class="reveal">
+          <div class="page-hero__breadcrumb"><a href="index.html">Home</a><span>/</span><span>Careers</span></div>
+          <span class="section-eyebrow">// Join The Forge</span>
+          <h1 class="page-hero__title">Level Up<br/>Your <span class="accent">Career</span></h1>
+          <p class="page-hero__desc">We're a team of 120+ obsessed creators. If you live and breathe games, work with intention, and want to build experiences that define a generation — you belong here.</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="#open-roles" class="btn btn-primary btn-icon-right">See Open Roles <span class="btn-arrow">→</span></a>
+            <a href="#apply" class="btn btn-ghost">Send Open Application</a>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <div style="background:var(--bg-card);border:1px solid var(--border-strong);border-radius:var(--radius-xl);padding:2rem;box-shadow:var(--shadow-card),var(--glow-pink);">
+            <p style="font-family:var(--font-pixel);font-size:0.5rem;color:var(--neon-pink);margin-bottom:1.25rem;letter-spacing:0.1em;">// WHY PIXELFORGE</p>
+            <div style="display:flex;flex-direction:column;gap:0.75rem;">
+              <div style="display:flex;align-items:center;gap:0.75rem;"><span style="font-size:1.1rem;">🌐</span><span style="font-size:0.9rem;color:var(--text-secondary);">100% Remote-friendly across all roles</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><span style="font-size:1.1rem;">💰</span><span style="font-size:0.9rem;color:var(--text-secondary);">Competitive compensation + profit sharing</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><span style="font-size:1.1rem;">🎮</span><span style="font-size:0.9rem;color:var(--text-secondary);">Work on titles you'll be proud to credit</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><span style="font-size:1.1rem;">🎓</span><span style="font-size:0.9rem;color:var(--text-secondary);">$3,000/yr learning & development budget</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><span style="font-size:1.1rem;">🏥</span><span style="font-size:0.9rem;color:var(--text-secondary);">Full health, dental, and vision coverage</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><span style="font-size:1.1rem;">🎉</span><span style="font-size:0.9rem;color:var(--text-secondary);">Game launch bonuses for shipped titles</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERKS -->
+    <section class="section section--alt">
+      <div class="container">
+        <div style="text-align:center;max-width:560px;margin:0 auto 3.5rem;" class="reveal">
+          <span class="section-eyebrow">// Benefits</span>
+          <h2 class="section-heading">The Full Package</h2>
+        </div>
+        <div class="perks-grid">
+          <div class="perk-card reveal reveal-delay-1"><div class="perk-card__icon">🌐</div><h3 class="perk-card__name">Remote-First Culture</h3><p class="perk-card__desc">Work from anywhere in the world. We operate asynchronously across 22 time zones with regular in-person summits.</p></div>
+          <div class="perk-card reveal reveal-delay-2"><div class="perk-card__icon">💰</div><h3 class="perk-card__name">Top-Tier Compensation</h3><p class="perk-card__desc">Competitive salaries benchmarked to top-25% of the industry, plus profit sharing on every shipped title you worked on.</p></div>
+          <div class="perk-card reveal reveal-delay-3"><div class="perk-card__icon">🎓</div><h3 class="perk-card__name">Learning & Growth</h3><p class="perk-card__desc">$3,000 annual L&D budget, paid conference attendance, GDC passes, and an internal knowledge-sharing platform.</p></div>
+          <div class="perk-card reveal reveal-delay-4"><div class="perk-card__icon">🏥</div><h3 class="perk-card__name">Full Health Coverage</h3><p class="perk-card__desc">100% company-paid medical, dental, and vision for you and your dependants. Mental health support included.</p></div>
+          <div class="perk-card reveal reveal-delay-1"><div class="perk-card__icon">🎮</div><h3 class="perk-card__name">Game Allowance</h3><p class="perk-card__desc">$1,200/yr game and hardware allowance. Because we believe research and fun are the same thing.</p></div>
+          <div class="perk-card reveal reveal-delay-2"><div class="perk-card__icon">🌴</div><h3 class="perk-card__name">Flexible Time Off</h3><p class="perk-card__desc">Unlimited PTO with a minimum 20-day encouragement. We mean it — please take a break.</p></div>
+          <div class="perk-card reveal reveal-delay-3"><div class="perk-card__icon">👶</div><h3 class="perk-card__name">Family Support</h3><p class="perk-card__desc">16-week fully paid parental leave, flexible return-to-work schedules, and childcare allowance.</p></div>
+          <div class="perk-card reveal reveal-delay-4"><div class="perk-card__icon">🚀</div><h3 class="perk-card__name">Launch Bonuses</h3><p class="perk-card__desc">Every team member on a shipped title receives a launch bonus tied to game performance. You share in our wins.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPEN ROLES -->
+    <section class="section" id="open-roles">
+      <div class="container">
+        <div style="margin-bottom:3rem;" class="reveal">
+          <span class="section-eyebrow">// Open Positions</span>
+          <h2 class="section-heading">5 Roles Open Now</h2>
+          <p class="section-subheading">Actively hiring for the following positions. All roles are open to remote candidates globally.</p>
+        </div>
+        <div class="jobs-layout">
+          <!-- Filter Sidebar -->
+          <div class="jobs-filter reveal">
+            <p class="jobs-filter-title">// FILTER BY DEPT</p>
+            <div class="dept-filter-list">
+              <button class="dept-btn active" data-dept="all">All Departments <span class="dept-count">5</span></button>
+              <button class="dept-btn" data-dept="design">Game Design <span class="dept-count">1</span></button>
+              <button class="dept-btn" data-dept="engineering">Engineering <span class="dept-count">1</span></button>
+              <button class="dept-btn" data-dept="art">Art <span class="dept-count">1</span></button>
+              <button class="dept-btn" data-dept="narrative">Narrative <span class="dept-count">1</span></button>
+              <button class="dept-btn" data-dept="qa">QA <span class="dept-count">1</span></button>
+            </div>
+          </div>
+
+          <!-- Job Cards -->
+          <div class="jobs-list reveal reveal-delay-1" id="jobs-list">
+            <div class="job-card" data-dept="design">
+              <div>
+                <p class="job-card__dept">Game Design</p>
+                <h3 class="job-card__title">Senior Game Designer</h3>
+                <div class="job-card__meta">
+                  <span class="job-meta-item">📍 San Francisco / Remote</span>
+                  <span class="job-meta-item">⏱ Full-time</span>
+                  <span class="job-meta-item">💰 $130k – $170k</span>
+                </div>
+              </div>
+              <div class="job-card__actions">
+                <span class="job-badge">Open</span>
+                <a href="#apply" class="btn btn-primary btn-sm">Apply →</a>
+              </div>
+            </div>
+
+            <div class="job-card" data-dept="engineering">
+              <div>
+                <p class="job-card__dept">Engineering</p>
+                <h3 class="job-card__title">Unreal Engine Developer (UE5)</h3>
+                <div class="job-card__meta">
+                  <span class="job-meta-item">📍 Remote</span>
+                  <span class="job-meta-item">⏱ Full-time</span>
+                  <span class="job-meta-item">💰 $140k – $180k</span>
+                </div>
+              </div>
+              <div class="job-card__actions">
+                <span class="job-badge">Open</span>
+                <a href="#apply" class="btn btn-primary btn-sm">Apply →</a>
+              </div>
+            </div>
+
+            <div class="job-card" data-dept="art">
+              <div>
+                <p class="job-card__dept">Art</p>
+                <h3 class="job-card__title">3D Environment Artist</h3>
+                <div class="job-card__meta">
+                  <span class="job-meta-item">📍 Austin / Remote</span>
+                  <span class="job-meta-item">⏱ Full-time</span>
+                  <span class="job-meta-item">💰 $90k – $120k</span>
+                </div>
+              </div>
+              <div class="job-card__actions">
+                <span class="job-badge">Open</span>
+                <a href="#apply" class="btn btn-primary btn-sm">Apply →</a>
+              </div>
+            </div>
+
+            <div class="job-card" data-dept="narrative">
+              <div>
+                <p class="job-card__dept">Narrative</p>
+                <h3 class="job-card__title">Narrative Director</h3>
+                <div class="job-card__meta">
+                  <span class="job-meta-item">📍 San Francisco / Hybrid</span>
+                  <span class="job-meta-item">⏱ Contract</span>
+                  <span class="job-meta-item">💰 Day rate (negotiable)</span>
+                </div>
+              </div>
+              <div class="job-card__actions">
+                <span class="job-badge contract">Contract</span>
+                <a href="#apply" class="btn btn-primary btn-sm">Apply →</a>
+              </div>
+            </div>
+
+            <div class="job-card" data-dept="qa">
+              <div>
+                <p class="job-card__dept">QA</p>
+                <h3 class="job-card__title">QA Lead — Console & Platform</h3>
+                <div class="job-card__meta">
+                  <span class="job-meta-item">📍 Tokyo / Remote</span>
+                  <span class="job-meta-item">⏱ Full-time</span>
+                  <span class="job-meta-item">💰 $80k – $110k</span>
+                </div>
+              </div>
+              <div class="job-card__actions">
+                <span class="job-badge">Open</span>
+                <a href="#apply" class="btn btn-primary btn-sm">Apply →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDIO CULTURE -->
+    <section class="section section--alt">
+      <div class="container">
+        <div style="text-align:center;max-width:560px;margin:0 auto 3.5rem;" class="reveal">
+          <span class="section-eyebrow">// Life at PixelForge</span>
+          <h2 class="section-heading">Our Culture</h2>
+        </div>
+        <div class="culture-grid">
+          <div class="culture-card reveal reveal-delay-1">
+            <div class="culture-card__img">🎮</div>
+            <div class="culture-card__body">
+              <h3 class="culture-card__title">Game Jam Fridays</h3>
+              <p class="culture-card__desc">Every other Friday is a voluntary game jam where teams build mini prototypes in 4 hours. The best ideas often become real features — or even full games.</p>
+            </div>
+          </div>
+          <div class="culture-card reveal reveal-delay-2">
+            <div class="culture-card__img">🌍</div>
+            <div class="culture-card__body">
+              <h3 class="culture-card__title">Annual Studio Summit</h3>
+              <p class="culture-card__desc">Once a year, the whole studio flies to one city for three days of talks, workshops, team-building, and a full day of gaming together. Always memorable.</p>
+            </div>
+          </div>
+          <div class="culture-card reveal reveal-delay-3">
+            <div class="culture-card__img">🧠</div>
+            <div class="culture-card__body">
+              <h3 class="culture-card__title">Pixel Talks</h3>
+              <p class="culture-card__desc">Monthly internal talks where any team member can share research, discoveries, or a game that inspired them. Knowledge sharing is in our DNA.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLICATION FORM -->
+    <section class="section" id="apply">
+      <div class="container" style="max-width:800px;">
+        <div style="text-align:center;margin-bottom:3rem;" class="reveal">
+          <span class="section-eyebrow">// Apply Now</span>
+          <h2 class="section-heading">Ready to Join?</h2>
+          <p class="section-subheading" style="margin:0 auto;">Apply for a specific role or send an open application. We read every submission personally.</p>
+        </div>
+        <div class="apply-form-wrap reveal reveal-delay-1">
+          <form class="apply-form" id="apply-form" novalidate>
+            <div class="form-row">
+              <div class="form-field"><label for="ap-name">Full Name</label><input type="text" id="ap-name" placeholder="Your name" required /></div>
+              <div class="form-field"><label for="ap-email">Email</label><input type="email" id="ap-email" placeholder="your@email.com" required /></div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="ap-role">Role Applying For</label>
+                <select id="ap-role">
+                  <option value="" disabled selected>Select a role</option>
+                  <option>Senior Game Designer</option>
+                  <option>Unreal Engine Developer (UE5)</option>
+                  <option>3D Environment Artist</option>
+                  <option>Narrative Director</option>
+                  <option>QA Lead — Console & Platform</option>
+                  <option>Open Application</option>
+                </select>
+              </div>
+              <div class="form-field"><label for="ap-portfolio">Portfolio / LinkedIn URL</label><input type="url" id="ap-portfolio" placeholder="https://yourwork.com" /></div>
+            </div>
+            <div class="form-field"><label for="ap-location">Current Location</label><input type="text" id="ap-location" placeholder="City, Country" /></div>
+            <div class="form-field">
+              <label for="ap-message">Why PixelForge? Tell us about yourself.</label>
+              <textarea id="ap-message" rows="6" placeholder="Share your experience, what drives you, and what you'd bring to the team..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full btn-icon-right">Submit Application <span class="btn-arrow">→</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><div class="logo-mark" style="width:32px;height:32px;"><svg viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/><rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/><rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/><rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/></svg></div><span class="logo-name">Pixel<span>Forge</span></span></a>
+          <p>A premium game development studio crafting bold, immersive experiences since 2018.</p>
+          <div class="footer-social"><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">🎮</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">▶</a></div>
+        </div>
+        <div class="footer-col"><h4>Studio</h4><a href="about.html">About Us</a><a href="careers.html">Careers</a><a href="#">Press Kit</a></div>
+        <div class="footer-col"><h4>Work</h4><a href="index.html#games">All Games</a><a href="services.html">Services</a><a href="#">Awards</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="mailto:hello@pixelforge.studio">hello@pixelforge.studio</a><a href="mailto:careers@pixelforge.studio">careers@pixelforge.studio</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 PixelForge Game Studio. All rights reserved.</p>
+        <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div>
+        <span class="footer-pixel-sig">Made with 8-bit love ❤️</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Department filter for job listings
+    const deptBtns = document.querySelectorAll('.dept-btn');
+    const jobCards = document.querySelectorAll('.job-card');
+    deptBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        deptBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const dept = btn.getAttribute('data-dept');
+        jobCards.forEach(card => {
+          const cardDept = card.getAttribute('data-dept');
+          card.style.display = (dept === 'all' || cardDept === dept) ? '' : 'none';
+        });
+      });
+    });
+    // Apply form
+    const applyForm = document.getElementById('apply-form');
+    if (applyForm) {
+      applyForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = applyForm.querySelector('[type="submit"]');
+        btn.textContent = '✓ Application Received! We\'ll be in touch within 5 business days.';
+        btn.disabled = true; btn.style.opacity = '0.7';
+        applyForm.reset();
+      });
+    }
+  </script>
+</body>
+</html>
