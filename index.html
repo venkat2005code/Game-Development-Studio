@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelForge Studio — Home 1 | Game Development Studio</title>
+  <meta name="description" content="PixelForge is a bold, creative game development studio specializing in custom game development, console porting, and immersive digital experiences." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ================================================================
+       SITE HEADER
+       ================================================================ -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+
+      <!-- Logo -->
+      <a href="index.html" class="logo" aria-label="PixelForge home">
+        <div class="logo-mark">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/>
+            <rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/>
+            <rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/>
+            <rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/>
+          </svg>
+        </div>
+        <span class="logo-name">Pixel<span>Forge</span></span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="main-nav" aria-label="Primary navigation">
+        <!-- Home Dropdown -->
+        <div class="nav-item dropdown">
+          <a href="index.html" class="nav-link active" aria-haspopup="true">
+            Home
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="2,4 6,8 10,4"/>
+            </svg>
+          </a>
+          <div class="nav-dropdown" role="menu">
+            <a href="index.html" class="dropdown-link" role="menuitem">
+              <div class="dropdown-link-icon violet">🎮</div>
+              <div class="dropdown-meta">
+                <span>Home 1</span>
+                <small>Modern Cinematic</small>
+              </div>
+              <span class="dropdown-link-badge">Current</span>
+            </a>
+            <a href="home2.html" class="dropdown-link" role="menuitem">
+              <div class="dropdown-link-icon cyan">👾</div>
+              <div class="dropdown-meta">
+                <span>Home 2</span>
+                <small>Retro Arcade</small>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-item"><a href="#about" class="nav-link">About</a></div>
+        <div class="nav-item"><a href="#services" class="nav-link">Services</a></div>
+        <div class="nav-item"><a href="#careers" class="nav-link">Careers</a></div>
+        <div class="nav-item"><a href="#contact" class="nav-link">Contact</a></div>
+      </nav>
+
+      <!-- Controls -->
+      <div class="header-controls">
+        <!-- RTL / LTR Toggle — shows active mode only -->
+        <button class="ctrl-btn" id="rtl-toggle" aria-label="Toggle text direction">
+          <span id="dir-label">LTR</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="ctrl-btn" id="theme-toggle" aria-label="Toggle colour theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+
+        <a href="#contact" class="btn btn-primary btn-sm header-cta btn-icon-right">
+          Start a Project <span class="btn-arrow">→</span>
+        </a>
+
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- ==============================================================
+         HERO — Cinematic Split Layout
+         ============================================================== -->
+    <section class="hero section" id="home">
+      <div class="hero__bg"></div>
+      <div class="hero__grid"></div>
+
+      <div class="container hero__inner">
+        <!-- Content -->
+        <div class="hero__content">
+          <p class="hero__pixel-label">Studio Est. 2018 — Digital Frontiers</p>
+          <h1 class="hero__headline reveal">
+            We Build<br/>
+            <span class="line-accent">Games That</span><br/>
+            Define Eras.
+          </h1>
+          <p class="hero__desc reveal reveal-delay-1">
+            PixelForge is a premium game development studio crafting bold, immersive
+            experiences across every platform. From bold indie titles to enterprise
+            porting — we forge worlds that players remember forever.
+          </p>
+          <div class="hero__actions reveal reveal-delay-2">
+            <a href="#games" class="btn btn-primary btn-lg btn-icon-right">
+              Explore Titles <span class="btn-arrow">→</span>
+            </a>
+            <a href="#services" class="btn btn-outline btn-lg">Our Services</a>
+          </div>
+
+          <div class="hero__stats reveal reveal-delay-3">
+            <div class="hero-stat">
+              <span class="hero-stat__num">42<span>+</span></span>
+              <span class="hero-stat__label">Games Shipped</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat__num">18<span>M</span></span>
+              <span class="hero-stat__label">Players Worldwide</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat__num">9<span>+</span></span>
+              <span class="hero-stat__label">Platform Partners</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="hero__visual reveal reveal-delay-1">
+          <div class="hero-mockup">
+            <div class="hero-mockup__frame">
+              <div class="hero-mockup__screen">
+                <div class="mockup-screen-glow"></div>
+                <div class="mockup-scanlines"></div>
+                <p class="mockup-placeholder-text">
+                  [GAME SCREENSHOT<br/>PLACEHOLDER]<br/><br/>
+                  Featured Title<br/>Neon Drifter X
+                </p>
+              </div>
+            </div>
+
+            <div class="hero-mockup__floating-card card--left">
+              <p class="float-card__label">Live Players</p>
+              <p class="float-card__value">1.2M</p>
+              <p class="float-card__badge">▲ +14% this week</p>
+            </div>
+
+            <div class="hero-mockup__floating-card card--right">
+              <p class="float-card__label">Metacritic Score</p>
+              <p class="float-card__value">94</p>
+              <p class="float-card__badge">★ Universal Acclaim</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         PUBLISHED TITLES
+         ============================================================== -->
+    <section class="section titles-section" id="games">
+      <div class="container">
+        <div class="titles-header reveal">
+          <div>
+            <span class="section-eyebrow">// Published Titles</span>
+            <h2 class="section-heading">Games That Moved<br/>the Industry</h2>
+          </div>
+          <div>
+            <p class="section-subheading">Each title is a deliberate creative statement — built from scratch with purpose, passion, and precision.</p>
+            <a href="#" class="btn btn-ghost btn-sm" style="margin-top:1rem;">View All Games →</a>
+          </div>
+        </div>
+
+        <div class="titles-grid reveal reveal-delay-1">
+          <!-- Featured Card -->
+          <div class="game-card game-card--featured">
+            <div class="game-card__thumb" style="height:280px;">
+              <div class="game-card__overlay"></div>
+              <div class="game-card__thumb-inner">
+                <div class="thumb-pixel-art">🏎️</div>
+                <span>[Game Cover Placeholder]</span>
+              </div>
+            </div>
+            <div class="game-card__body">
+              <div class="game-card__platform">
+                <span class="platform-pill pc">PC</span>
+                <span class="platform-pill console">PS5</span>
+                <span class="platform-pill console">Xbox</span>
+              </div>
+              <h3 class="game-card__name">Neon Drifter X</h3>
+              <p class="game-card__desc">A synthwave-soaked open-world racing game set in a retro-futuristic megacity. Multiple storylines, dynamic weather, and a fully licensed soundtrack from 40+ artists.</p>
+              <div class="game-card__meta">
+                <span class="game-card__rating">★ 9.4</span>
+                <span class="game-card__year">2025</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Cards -->
+          <div class="game-card">
+            <div class="game-card__thumb">
+              <div class="game-card__overlay"></div>
+              <div class="game-card__thumb-inner">
+                <div class="thumb-pixel-art">⚔️</div>
+                <span>[Cover Placeholder]</span>
+              </div>
+            </div>
+            <div class="game-card__body">
+              <div class="game-card__platform">
+                <span class="platform-pill mobile">Mobile</span>
+                <span class="platform-pill console">Switch</span>
+              </div>
+              <h3 class="game-card__name">Pixel Knights</h3>
+              <p class="game-card__desc">Roguelike dungeon crawler with deep lore.</p>
+              <div class="game-card__meta">
+                <span class="game-card__rating">★ 8.7</span>
+                <span class="game-card__year">2024</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card">
+            <div class="game-card__thumb">
+              <div class="game-card__overlay"></div>
+              <div class="game-card__thumb-inner">
+                <div class="thumb-pixel-art">🔮</div>
+                <span>[Cover Placeholder]</span>
+              </div>
+            </div>
+            <div class="game-card__body">
+              <div class="game-card__platform">
+                <span class="platform-pill pc">VR</span>
+                <span class="platform-pill pc">PC</span>
+              </div>
+              <h3 class="game-card__name">Cyber Nexus</h3>
+              <p class="game-card__desc">Immersive cyberpunk detective story.</p>
+              <div class="game-card__meta">
+                <span class="game-card__rating">★ 9.1</span>
+                <span class="game-card__year">2024</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card">
+            <div class="game-card__thumb">
+              <div class="game-card__overlay"></div>
+              <div class="game-card__thumb-inner">
+                <div class="thumb-pixel-art">🌌</div>
+                <span>[Cover Placeholder]</span>
+              </div>
+            </div>
+            <div class="game-card__body">
+              <div class="game-card__platform">
+                <span class="platform-pill console">PS5</span>
+              </div>
+              <h3 class="game-card__name">Void Protocol</h3>
+              <p class="game-card__desc">Atmospheric survival RPG in deep space.</p>
+              <div class="game-card__meta">
+                <span class="game-card__rating">★ 8.9</span>
+                <span class="game-card__year">2023</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card">
+            <div class="game-card__thumb">
+              <div class="game-card__overlay"></div>
+              <div class="game-card__thumb-inner">
+                <div class="thumb-pixel-art">🐉</div>
+                <span>[Cover Placeholder]</span>
+              </div>
+            </div>
+            <div class="game-card__body">
+              <div class="game-card__platform">
+                <span class="platform-pill mobile">Mobile</span>
+              </div>
+              <h3 class="game-card__name">Dragon Byte</h3>
+              <p class="game-card__desc">Casual strategy RPG. 10M+ downloads.</p>
+              <div class="game-card__meta">
+                <span class="game-card__rating">★ 8.2</span>
+                <span class="game-card__year">2023</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         ABOUT — STUDIO IDENTITY
+         ============================================================== -->
+    <section class="section section--alt" id="about">
+      <div class="container">
+        <div class="grid-2" style="align-items:center; gap:5rem;">
+          <div class="reveal">
+            <span class="section-eyebrow">// About The Studio</span>
+            <h2 class="section-heading">Built by Players,<br/>for Players.</h2>
+            <p class="section-subheading" style="margin-bottom:1.5rem;">
+              PixelForge was founded in 2018 by a team of obsessed gamers who believed games could be more than entertainment — they could be art, culture, and legacy.
+            </p>
+            <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.8;margin-bottom:2rem;">
+              Today, we're a 120-person studio spanning design, engineering, narrative, and audio disciplines. Every project starts with a bold question: <em>"What would make a player feel something they've never felt before?"</em>
+            </p>
+            <div class="grid-2" style="gap:1.25rem;">
+              <div style="padding:1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);">
+                <div style="font-family:var(--font-heading);font-size:1.75rem;font-weight:800;color:var(--accent-1);">120+</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);margin-top:0.25rem;">Team Members</div>
+              </div>
+              <div style="padding:1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);">
+                <div style="font-family:var(--font-heading);font-size:1.75rem;font-weight:800;color:var(--accent-2);">8 yrs</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);margin-top:0.25rem;">Industry Experience</div>
+              </div>
+              <div style="padding:1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);">
+                <div style="font-family:var(--font-heading);font-size:1.75rem;font-weight:800;color:var(--neon-pink);">23</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);margin-top:0.25rem;">Industry Awards</div>
+              </div>
+              <div style="padding:1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);">
+                <div style="font-family:var(--font-heading);font-size:1.75rem;font-weight:800;color:var(--neon-green);">4</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);margin-top:0.25rem;">Office Locations</div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <div style="width:100%;aspect-ratio:1;background:var(--bg-card);border:1px solid var(--border-strong);border-radius:var(--radius-xl);display:flex;align-items:center;justify-content:center;font-family:var(--font-pixel);font-size:0.55rem;color:var(--text-muted);text-align:center;padding:2rem;box-shadow:var(--shadow-card);">
+              [Studio Team Photo<br/>Placeholder]
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         SERVICES
+         ============================================================== -->
+    <section class="section" id="services">
+      <div class="container">
+        <div style="max-width:600px;margin-bottom:3.5rem;" class="reveal">
+          <span class="section-eyebrow">// What We Build</span>
+          <h2 class="section-heading">From Concept to<br/>Gold Master</h2>
+          <p class="section-subheading">Every service we offer is designed to elevate your project — whether you're starting from scratch or scaling an existing franchise.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal reveal-delay-1">
+            <div class="service-icon">🎮</div>
+            <h3 class="service-name">Custom Game Development</h3>
+            <p class="service-desc">Full-cycle game production from pre-production through to gold master. Unreal Engine & Unity specialists. We handle creative direction, engineering, QA, and launch.</p>
+            <div class="service-tags">
+              <span class="service-tag">Unreal 5</span>
+              <span class="service-tag">Unity</span>
+              <span class="service-tag">Godot</span>
+              <span class="service-tag">Custom Engines</span>
+            </div>
+          </div>
+
+          <div class="service-card reveal reveal-delay-2">
+            <div class="service-icon">🚀</div>
+            <h3 class="service-name">Console & Platform Porting</h3>
+            <p class="service-desc">Expert porting to PlayStation 5, Xbox Series X|S, Nintendo Switch, iOS, and Android. We handle platform certification, optimization, and compliance submission.</p>
+            <div class="service-tags">
+              <span class="service-tag">PS5</span>
+              <span class="service-tag">Xbox</span>
+              <span class="service-tag">Switch</span>
+              <span class="service-tag">iOS / Android</span>
+            </div>
+          </div>
+
+          <div class="service-card reveal reveal-delay-3">
+            <div class="service-icon">🎨</div>
+            <h3 class="service-name">Art & Asset Production</h3>
+            <p class="service-desc">World-class 2D/3D art, character design, environment art, UI/UX systems, VFX, and animation pipelines. Pixel art and modern 3D rendering both handled in-house.</p>
+            <div class="service-tags">
+              <span class="service-tag">3D Modelling</span>
+              <span class="service-tag">Pixel Art</span>
+              <span class="service-tag">VFX</span>
+              <span class="service-tag">UI Design</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem;" class="reveal reveal-delay-4">
+          <div class="service-card" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
+            <div>
+              <div class="service-icon">📱</div>
+              <h3 class="service-name">Co-development & Live Ops</h3>
+              <p class="service-desc">Embed our teams within yours. We supplement studio capacity for live-service titles, DLC production, content updates, and post-launch optimization.</p>
+            </div>
+            <div>
+              <div class="service-icon">🔊</div>
+              <h3 class="service-name">Audio & Music Supervision</h3>
+              <p class="service-desc">Original scores, dynamic audio systems, adaptive music layers, and SFX libraries. Full soundtrack production and artist licensing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         LEADERBOARD + COMMUNITY + BOOKING
+         ============================================================== -->
+    <section class="section section--alt community-section" id="community">
+      <div class="container">
+        <div style="max-width:600px;margin-bottom:3.5rem;" class="reveal">
+          <span class="section-eyebrow">// Community & Events</span>
+          <h2 class="section-heading">Where Players<br/>Compete & Connect</h2>
+          <p class="section-subheading">Weekly tournaments, craft tap events, and private studio booking — the PixelForge community never stops playing.</p>
+        </div>
+
+        <div class="community-inner">
+          <!-- Leaderboard -->
+          <div class="leaderboard-panel reveal reveal-delay-1">
+            <div class="leaderboard-header">
+              <span class="leaderboard-title">⚡ Weekly High-Scores</span>
+              <span class="leaderboard-badge">LIVE</span>
+            </div>
+            <div class="leaderboard-table">
+              <div class="score-row">
+                <div class="score-rank">01</div>
+                <div class="score-player">
+                  <span class="score-name">Z3R0_C00L</span>
+                  <span class="score-game">Neon Drifter X</span>
+                </div>
+                <span class="score-points">999,999</span>
+              </div>
+              <div class="score-row">
+                <div class="score-rank">02</div>
+                <div class="score-player">
+                  <span class="score-name">N30N_N1NJ4</span>
+                  <span class="score-game">Pixel Knights</span>
+                </div>
+                <span class="score-points">854,230</span>
+              </div>
+              <div class="score-row">
+                <div class="score-rank">03</div>
+                <div class="score-player">
+                  <span class="score-name">P1X3L_K1NG</span>
+                  <span class="score-game">Cyber Nexus</span>
+                </div>
+                <span class="score-points">712,100</span>
+              </div>
+              <div class="score-row">
+                <div class="score-rank">04</div>
+                <div class="score-player">
+                  <span class="score-name">ARCADE_RAT</span>
+                  <span class="score-game">Void Protocol</span>
+                </div>
+                <span class="score-points">650,400</span>
+              </div>
+              <div class="score-row">
+                <div class="score-rank">05</div>
+                <div class="score-player">
+                  <span class="score-name">GL1TCH_G0D</span>
+                  <span class="score-game">Dragon Byte</span>
+                </div>
+                <span class="score-points">601,880</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booking + Tap List -->
+          <div class="booking-panel">
+            <div class="booking-card reveal reveal-delay-2">
+              <h3 class="booking-heading">🍺 Craft Tap List</h3>
+              <p class="booking-desc">Our studio lounge features rotating craft taps curated for gaming marathons and launch celebrations.</p>
+              <div class="tap-list">
+                <div class="tap-item">
+                  <span class="tap-name">Pixel Pale Ale</span>
+                  <span class="tap-style">American Pale Ale</span>
+                  <span class="tap-abv">5.4% ABV</span>
+                </div>
+                <div class="tap-item">
+                  <span class="tap-name">Neon IPA</span>
+                  <span class="tap-style">West Coast IPA</span>
+                  <span class="tap-abv">6.8% ABV</span>
+                </div>
+                <div class="tap-item">
+                  <span class="tap-name">8-Bit Stout</span>
+                  <span class="tap-style">Oatmeal Stout</span>
+                  <span class="tap-abv">5.9% ABV</span>
+                </div>
+                <div class="tap-item">
+                  <span class="tap-name">Glitch Lager</span>
+                  <span class="tap-style">Munich Lager</span>
+                  <span class="tap-abv">4.6% ABV</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="booking-card reveal reveal-delay-3">
+              <h3 class="booking-heading">🎉 Private Party Booking</h3>
+              <p class="booking-desc">Reserve PixelForge's exclusive retro-arcade lounge for your launch party, corporate event, or private gaming night.</p>
+              <form class="booking-form" id="booking-form" novalidate>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="book-name">Full Name</label>
+                    <input type="text" id="book-name" name="name" placeholder="Alex Chen" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="book-email">Email</label>
+                    <input type="email" id="book-email" name="email" placeholder="hello@studio.com" required />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label for="book-type">Event Type</label>
+                  <select id="book-type" name="type" required>
+                    <option value="" disabled selected>Select event type</option>
+                    <option value="launch">Game Launch Party</option>
+                    <option value="corporate">Corporate Event</option>
+                    <option value="private">Private Gaming Night</option>
+                    <option value="tournament">Tournament Event</option>
+                  </select>
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="book-date">Preferred Date</label>
+                    <input type="date" id="book-date" name="date" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="book-guests">Guest Count</label>
+                    <input type="number" id="book-guests" name="guests" placeholder="e.g. 30" min="10" max="200" />
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Request Booking →</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         CAREERS
+         ============================================================== -->
+    <section class="section" id="careers">
+      <div class="container">
+        <div class="careers-strip reveal">
+          <div>
+            <p class="careers-eyebrow">// Now Hiring</p>
+            <h2 class="careers-heading">Join the Forge.<br/>Build the Future.</h2>
+            <p class="careers-desc">We're looking for bold, creative minds who want to shape the next generation of gaming experiences. Remote-friendly, creatively-driven, competitively compensated.</p>
+            <a href="mailto:careers@pixelforge.studio" class="btn btn-primary" style="margin-top:1.75rem;">View Open Roles →</a>
+          </div>
+          <div class="careers-roles">
+            <a href="#" class="role-pill">Senior Game Designer</a>
+            <a href="#" class="role-pill">Unreal Engine Dev</a>
+            <a href="#" class="role-pill">3D Environment Artist</a>
+            <a href="#" class="role-pill">Narrative Director</a>
+            <a href="#" class="role-pill">QA Lead</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         FINAL CTA / CONTACT
+         ============================================================== -->
+    <section class="section final-cta" id="contact">
+      <div class="final-cta__bg"></div>
+      <div class="final-cta__bg-art"></div>
+      <div class="container">
+        <div class="final-cta__content reveal">
+          <span class="final-cta__icon">🎮</span>
+          <h2 class="final-cta__heading">
+            Your Vision Deserves<br/>
+            <span>A World-Class Team</span>
+          </h2>
+          <p class="final-cta__desc">
+            Whether you have a fully-formed GDD or just a spark of an idea — our team works with you from day one to design, build, and launch experiences that resonate. Let's create something legendary together.
+          </p>
+          <div class="final-cta__actions">
+            <a href="mailto:hello@pixelforge.studio" class="btn btn-primary btn-lg btn-icon-right">
+              Send a Project Brief <span class="btn-arrow">→</span>
+            </a>
+            <a href="tel:+18005551234" class="btn btn-outline btn-lg">Schedule a Call</a>
+          </div>
+          <div class="final-cta__perks">
+            <span class="final-cta__perk"><span class="perk-dot"></span>NDA on first contact</span>
+            <span class="final-cta__perk"><span class="perk-dot"></span>Free concept review</span>
+            <span class="final-cta__perk"><span class="perk-dot"></span>Response within 24hrs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==============================================================
+       FOOTER
+       ============================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-mark" style="width:32px;height:32px;">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/>
+                <rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/>
+                <rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/>
+                <rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/>
+              </svg>
+            </div>
+            <span class="logo-name">Pixel<span>Forge</span></span>
+          </a>
+          <p>A premium game development studio crafting bold, immersive experiences across every platform since 2018.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Twitter">𝕏</a>
+            <a href="#" class="social-btn" aria-label="Discord">🎮</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <a href="#about">About Us</a>
+          <a href="#careers">Careers</a>
+          <a href="#">Press Kit</a>
+          <a href="#">Partners</a>
+        </div>
+        <div class="footer-col">
+          <h4>Work</h4>
+          <a href="#games">All Games</a>
+          <a href="#services">Services</a>
+          <a href="#">Case Studies</a>
+          <a href="#">Awards</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@pixelforge.studio">hello@pixelforge.studio</a>
+          <a href="tel:+18005551234">+1 800 555 1234</a>
+          <a href="#">San Francisco, CA</a>
+          <a href="#">Austin, TX</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 PixelForge Game Studio. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+        <span class="footer-pixel-sig">Made with 8-bit love ❤️</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

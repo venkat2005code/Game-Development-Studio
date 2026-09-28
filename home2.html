@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelForge Studio — Home 2 | Retro Arcade Experience</title>
+  <meta name="description" content="PixelForge Retro Arcade Mode — Neon dark-mode theme with nostalgic 8-bit styling. Explore our game cabinet lists, high-score leaderboards, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ============================================================
+       HOME 2 — RETRO EXCLUSIVE STYLES
+       ============================================================ */
+
+    /* Neon Platform Filter Tabs */
+    .platform-filter {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-pixel);
+      font-size: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--trans);
+      letter-spacing: 0.05em;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: rgba(180,77,255,0.12);
+      border-color: var(--neon-violet);
+      color: var(--neon-violet);
+      box-shadow: var(--glow-violet);
+    }
+
+    /* Contact Form (Enquiry) */
+    .enquiry-section {
+      background: var(--bg-surface);
+    }
+
+    .enquiry-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .enquiry-info { max-width: 460px; }
+
+    .enquiry-highlight {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .enquiry-highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    .enquiry-highlight-icon {
+      color: var(--neon-cyan);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .enquiry-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .enquiry-form-header {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .enquiry-form-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Pixel Stats Row */
+    .pixel-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: -2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .pixel-stat-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--trans);
+    }
+
+    .pixel-stat-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .pixel-stat-card:nth-child(1)::before { background: var(--neon-violet); box-shadow: var(--glow-violet); }
+    .pixel-stat-card:nth-child(2)::before { background: var(--neon-cyan);   box-shadow: var(--glow-cyan);   }
+    .pixel-stat-card:nth-child(3)::before { background: var(--neon-pink);   box-shadow: var(--glow-pink);   }
+    .pixel-stat-card:nth-child(4)::before { background: var(--neon-green);  }
+
+    .pixel-stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+
+    .pixel-stat-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .pixel-stat-num {
+      font-family: var(--font-pixel);
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .pixel-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Featured game horizontal row */
+    .game-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 3.5rem;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .showcase-media {
+      height: 100%;
+      min-height: 360px;
+      background: var(--bg-subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      font-family: var(--font-pixel);
+      font-size: 0.55rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .showcase-media-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(180,77,255,0.15) 0%, transparent 70%);
+    }
+
+    .showcase-art { font-size: 3rem; z-index: 1; filter: drop-shadow(0 0 20px var(--neon-violet)); }
+    .showcase-media p { z-index: 1; }
+
+    .showcase-info {
+      padding: 2.5rem 2.5rem 2.5rem 0;
+    }
+
+    .showcase-meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .showcase-title {
+      font-family: var(--font-heading);
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .showcase-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .showcase-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1.25rem;
+      background: var(--bg-subtle);
+      border-radius: var(--radius-md);
+    }
+
+    .detail-item label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .detail-item span {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    /* Final CTA Home 2 — retro spin */
+    .final-cta2 {
+      position: relative;
+      background: var(--bg-base);
+      overflow: hidden;
+    }
+
+    .final-cta2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 10% 50%, rgba(0,229,255,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 50%, rgba(180,77,255,0.12) 0%, transparent 50%);
+    }
+
+    .final-cta2-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .final-cta2-pixel-art {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pixel-border-box {
+      background: var(--bg-card);
+      border: 2px solid var(--neon-violet);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      font-family: var(--font-pixel);
+      font-size: 0.55rem;
+      color: var(--neon-violet);
+      line-height: 2.8;
+      box-shadow: var(--glow-violet);
+      text-shadow: var(--glow-violet);
+    }
+
+    .pixel-border-box .cyan { color: var(--neon-cyan); text-shadow: var(--glow-cyan); }
+    .pixel-border-box .green { color: var(--neon-green); }
+    .pixel-border-box .pink { color: var(--neon-pink); text-shadow: var(--glow-pink); }
+
+    @media (max-width: 768px) {
+      .enquiry-inner { grid-template-columns: 1fr; }
+      .pixel-stats-row { grid-template-columns: repeat(2, 1fr); }
+      .game-showcase { grid-template-columns: 1fr; }
+      .showcase-info { padding: 1.5rem; }
+      .final-cta2-inner { grid-template-columns: 1fr; }
+      .showcase-details { grid-template-columns: repeat(2, 1fr); }
+      [dir="rtl"] .enquiry-inner { direction: rtl; }
+      [dir="rtl"] .final-cta2-inner { direction: rtl; }
+    }
+
+    [dir="rtl"] .enquiry-inner  { direction: rtl; }
+    [dir="rtl"] .final-cta2-inner { direction: rtl; }
+    [dir="rtl"] .pixel-stats-row { direction: rtl; }
+    [dir="rtl"] .game-showcase { direction: rtl; }
+    [dir="rtl"] .showcase-info { padding: 2.5rem 2.5rem 2.5rem 0; direction: rtl; }
+  </style>
+</head>
+<body>
+
+  <!-- ================================================================
+       SITE HEADER (same across both pages)
+       ================================================================ -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+
+      <a href="index.html" class="logo" aria-label="PixelForge home">
+        <div class="logo-mark">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/>
+            <rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/>
+            <rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/>
+            <rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/>
+          </svg>
+        </div>
+        <span class="logo-name">Pixel<span>Forge</span></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <div class="nav-item dropdown">
+          <a href="home2.html" class="nav-link active" aria-haspopup="true">
+            Home
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="2,4 6,8 10,4"/>
+            </svg>
+          </a>
+          <div class="nav-dropdown" role="menu">
+            <a href="index.html" class="dropdown-link" role="menuitem">
+              <div class="dropdown-link-icon violet">🎮</div>
+              <div class="dropdown-meta"><span>Home 1</span><small>Modern Cinematic</small></div>
+            </a>
+            <a href="home2.html" class="dropdown-link" role="menuitem">
+              <div class="dropdown-link-icon cyan">👾</div>
+              <div class="dropdown-meta"><span>Home 2</span><small>Retro Arcade</small></div>
+              <span class="dropdown-link-badge">Current</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="#about2" class="nav-link">About</a></div>
+        <div class="nav-item"><a href="#services2" class="nav-link">Services</a></div>
+        <div class="nav-item"><a href="#careers2" class="nav-link">Careers</a></div>
+        <div class="nav-item"><a href="#contact2" class="nav-link">Contact</a></div>
+      </nav>
+
+      <div class="header-controls">
+        <button class="ctrl-btn" id="rtl-toggle" aria-label="Toggle text direction">
+          <span id="dir-label">LTR</span>
+        </button>
+        <button class="ctrl-btn" id="theme-toggle" aria-label="Toggle colour theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a href="#contact2" class="btn btn-primary btn-sm header-cta btn-icon-right">
+          Start a Project <span class="btn-arrow">→</span>
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==============================================================
+         HERO 2 — Retro Terminal Style
+         ============================================================== -->
+    <section class="hero2 section" id="home2-hero">
+      <div class="hero2__crt-overlay"></div>
+      <div class="hero2__bg-blobs">
+        <div class="hero2__blob hero2__blob--1"></div>
+        <div class="hero2__blob hero2__blob--2"></div>
+      </div>
+
+      <div class="container hero2__inner">
+        <div class="hero2__terminal reveal">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <div class="terminal-dot red"></div>
+              <div class="terminal-dot yellow"></div>
+              <div class="terminal-dot green"></div>
+            </div>
+            <span class="terminal-bar-title">pixelforge_studio.sh — bash — 80×24</span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">cd /pixelforge/studio</span></div>
+            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">run --mode="legendary"</span></div>
+            <div class="terminal-line"><span class="output">  > Loading game engine... ████████████ 100%</span></div>
+            <div class="terminal-line"><span class="output">  > Studio active: 120 devs online</span></div>
+            <div class="terminal-line"><span class="success">  ✓ System ready. Welcome, Player One.</span></div>
+            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">_<span class="terminal-cursor"></span></span></div>
+          </div>
+        </div>
+
+        <h1 class="hero2__headline reveal reveal-delay-1">
+          <span class="h2-accent">INSERT COIN</span><br/>
+          TO BEGIN YOUR<br/>
+          <span class="h2-cyan">LEGEND</span>
+        </h1>
+
+        <p class="hero2__sub reveal reveal-delay-2">
+          PixelForge blends nostalgic 8-bit soul with cutting-edge game technology. We ship titles that feel like home — and play like the future. Interactive arcades, tournaments, and a craft lounge to match.
+        </p>
+
+        <div class="hero2__actions reveal reveal-delay-3">
+          <a href="#cabinet" class="btn btn-primary btn-lg btn-icon-right">
+            View Game Cabinet <span class="btn-arrow">→</span>
+          </a>
+          <a href="#contact2" class="btn btn-ghost btn-lg">Send Enquiry</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pixel Marquee -->
+    <div class="pixel-marquee">
+      <div class="pixel-marquee__track">
+        <span class="marquee-item">🎮 Neon Drifter X <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">👾 Pixel Knights <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">🔮 Cyber Nexus <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">🌌 Void Protocol <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">🐉 Dragon Byte <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">⚡ Volt Runner <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">🏆 Weekly High-Scores Live <span class="marquee-sep">✦</span></span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee-item">🎮 Neon Drifter X <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">👾 Pixel Knights <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">🔮 Cyber Nexus <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">🌌 Void Protocol <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">🐉 Dragon Byte <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">⚡ Volt Runner <span class="marquee-sep">✦</span></span>
+        <span class="marquee-item">🏆 Weekly High-Scores Live <span class="marquee-sep">✦</span></span>
+      </div>
+    </div>
+
+    <!-- Pixel Stats -->
+    <section class="section" style="padding-top:5rem;">
+      <div class="container">
+        <div class="pixel-stats-row reveal">
+          <div class="pixel-stat-card">
+            <span class="pixel-stat-icon">🎮</span>
+            <span class="pixel-stat-num">42</span>
+            <span class="pixel-stat-label">Games Shipped</span>
+          </div>
+          <div class="pixel-stat-card">
+            <span class="pixel-stat-icon">🌐</span>
+            <span class="pixel-stat-num">18M+</span>
+            <span class="pixel-stat-label">Players Worldwide</span>
+          </div>
+          <div class="pixel-stat-card">
+            <span class="pixel-stat-icon">🏆</span>
+            <span class="pixel-stat-num">23</span>
+            <span class="pixel-stat-label">Industry Awards</span>
+          </div>
+          <div class="pixel-stat-card">
+            <span class="pixel-stat-icon">👾</span>
+            <span class="pixel-stat-num">9+</span>
+            <span class="pixel-stat-label">Platform Partners</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         GAME CABINET — Interactive List by Platform
+         ============================================================== -->
+    <section class="section section--dark cabinet-section" id="cabinet">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:3rem;" class="reveal">
+          <span class="section-eyebrow">// Interactive Game Cabinet</span>
+          <h2 class="section-heading">Choose Your Game</h2>
+          <p class="section-subheading" style="margin:0 auto;">Browse our full library by platform. Every title is a meticulously crafted experience.</p>
+        </div>
+
+        <div class="platform-filter reveal reveal-delay-1">
+          <button class="filter-btn active" data-filter="all">ALL</button>
+          <button class="filter-btn" data-filter="pc">PC</button>
+          <button class="filter-btn" data-filter="console">Console</button>
+          <button class="filter-btn" data-filter="mobile">Mobile</button>
+          <button class="filter-btn" data-filter="vr">VR</button>
+        </div>
+
+        <div class="cabinet-grid" id="cabinet-grid">
+          <div class="cabinet-card" data-platform="pc console">
+            <div class="cabinet-screen">
+              <div class="cabinet-scanlines"></div>
+              <div class="cabinet-pixel-art">🏎️</div>
+              <div class="cabinet-title">NEON DRIFTER X</div>
+              <div class="cabinet-placeholder">[Game Screenshot<br/>Placeholder]</div>
+            </div>
+            <div class="cabinet-info">
+              <p class="cabinet-genre">RACING / OPEN WORLD</p>
+              <h3 class="cabinet-name">Neon Drifter X</h3>
+            </div>
+          </div>
+
+          <div class="cabinet-card" data-platform="mobile console">
+            <div class="cabinet-screen">
+              <div class="cabinet-scanlines"></div>
+              <div class="cabinet-pixel-art">⚔️</div>
+              <div class="cabinet-title">PIXEL KNIGHTS</div>
+              <div class="cabinet-placeholder">[Game Screenshot<br/>Placeholder]</div>
+            </div>
+            <div class="cabinet-info">
+              <p class="cabinet-genre">ROGUELIKE / RPG</p>
+              <h3 class="cabinet-name">Pixel Knights</h3>
+            </div>
+          </div>
+
+          <div class="cabinet-card" data-platform="vr pc">
+            <div class="cabinet-screen">
+              <div class="cabinet-scanlines"></div>
+              <div class="cabinet-pixel-art">🔮</div>
+              <div class="cabinet-title">CYBER NEXUS</div>
+              <div class="cabinet-placeholder">[Game Screenshot<br/>Placeholder]</div>
+            </div>
+            <div class="cabinet-info">
+              <p class="cabinet-genre">DETECTIVE / VR</p>
+              <h3 class="cabinet-name">Cyber Nexus</h3>
+            </div>
+          </div>
+
+          <div class="cabinet-card" data-platform="console">
+            <div class="cabinet-screen">
+              <div class="cabinet-scanlines"></div>
+              <div class="cabinet-pixel-art">🌌</div>
+              <div class="cabinet-title">VOID PROTOCOL</div>
+              <div class="cabinet-placeholder">[Game Screenshot<br/>Placeholder]</div>
+            </div>
+            <div class="cabinet-info">
+              <p class="cabinet-genre">SURVIVAL / RPG</p>
+              <h3 class="cabinet-name">Void Protocol</h3>
+            </div>
+          </div>
+
+          <div class="cabinet-card" data-platform="mobile">
+            <div class="cabinet-screen">
+              <div class="cabinet-scanlines"></div>
+              <div class="cabinet-pixel-art">🐉</div>
+              <div class="cabinet-title">DRAGON BYTE</div>
+              <div class="cabinet-placeholder">[Game Screenshot<br/>Placeholder]</div>
+            </div>
+            <div class="cabinet-info">
+              <p class="cabinet-genre">CASUAL / STRATEGY</p>
+              <h3 class="cabinet-name">Dragon Byte</h3>
+            </div>
+          </div>
+
+          <div class="cabinet-card" data-platform="pc">
+            <div class="cabinet-screen">
+              <div class="cabinet-scanlines"></div>
+              <div class="cabinet-pixel-art">⚡</div>
+              <div class="cabinet-title">VOLT RUNNER</div>
+              <div class="cabinet-placeholder">[Game Screenshot<br/>Placeholder]</div>
+            </div>
+            <div class="cabinet-info">
+              <p class="cabinet-genre">SPEEDRUN / ACTION</p>
+              <h3 class="cabinet-name">Volt Runner</h3>
+            </div>
+          </div>
+
+          <div class="cabinet-card" data-platform="pc console">
+            <div class="cabinet-screen">
+              <div class="cabinet-scanlines"></div>
+              <div class="cabinet-pixel-art">🤖</div>
+              <div class="cabinet-title">MECH UPRISING</div>
+              <div class="cabinet-placeholder">[Game Screenshot<br/>Placeholder]</div>
+            </div>
+            <div class="cabinet-info">
+              <p class="cabinet-genre">STRATEGY / SCI-FI</p>
+              <h3 class="cabinet-name">Mech Uprising</h3>
+            </div>
+          </div>
+
+          <div class="cabinet-card" data-platform="vr">
+            <div class="cabinet-screen">
+              <div class="cabinet-scanlines"></div>
+              <div class="cabinet-pixel-art">🌊</div>
+              <div class="cabinet-title">DEEP DIVE VR</div>
+              <div class="cabinet-placeholder">[Game Screenshot<br/>Placeholder]</div>
+            </div>
+            <div class="cabinet-info">
+              <p class="cabinet-genre">EXPLORATION / VR</p>
+              <h3 class="cabinet-name">Deep Dive VR</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         FEATURED TITLE SHOWCASE
+         ============================================================== -->
+    <section class="section" id="about2">
+      <div class="container">
+        <div style="margin-bottom:3rem;" class="reveal">
+          <span class="section-eyebrow">// Featured Release</span>
+          <h2 class="section-heading">Spotlight Title</h2>
+        </div>
+        <div class="game-showcase reveal reveal-delay-1">
+          <div class="showcase-media">
+            <div class="showcase-media-glow"></div>
+            <div class="showcase-art">🏎️</div>
+            <p>[Full-width Game Screenshot<br/>or Trailer Thumbnail Placeholder]</p>
+          </div>
+          <div class="showcase-info">
+            <div class="showcase-meta">
+              <span class="platform-pill pc">PC</span>
+              <span class="platform-pill console">PS5</span>
+              <span class="platform-pill console">Xbox Series X</span>
+            </div>
+            <h3 class="showcase-title">Neon Drifter X</h3>
+            <p class="showcase-desc">
+              The most ambitious racing game of the decade. Open-world megacity with 200+ km of road, dynamic day/night cycle, 80+ licensed soundtrack tracks, and a deep narrative campaign spanning three acts. Built on Unreal Engine 5 with full ray tracing.
+            </p>
+            <div class="showcase-details">
+              <div class="detail-item">
+                <label>Genre</label>
+                <span>Open World Racing</span>
+              </div>
+              <div class="detail-item">
+                <label>Engine</label>
+                <span>Unreal 5</span>
+              </div>
+              <div class="detail-item">
+                <label>Rating</label>
+                <span>★ 9.4 / 10</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <a href="#" class="btn btn-primary btn-icon-right">View Game Page <span class="btn-arrow">→</span></a>
+              <a href="#" class="btn btn-ghost">Trailer [Placeholder]</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         SERVICES HOME 2 (Different layout - icon row)
+         ============================================================== -->
+    <section class="section section--alt" id="services2">
+      <div class="container">
+        <div style="text-align:center;max-width:600px;margin:0 auto 3.5rem;" class="reveal">
+          <span class="section-eyebrow">// Development Services</span>
+          <h2 class="section-heading">We Build Every Layer of Your Game</h2>
+          <p class="section-subheading" style="margin:0 auto;">Custom development, porting, art production, audio, live ops — the full stack under one roof.</p>
+        </div>
+        <div class="grid-4 reveal reveal-delay-1">
+          <div style="text-align:center;padding:2rem 1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all var(--trans);" onmouseover="this.style.borderColor='var(--neon-violet)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+            <div style="font-size:2.5rem;margin-bottom:1.25rem;">🎮</div>
+            <h4 style="font-family:var(--font-heading);font-size:1rem;font-weight:700;margin-bottom:0.75rem;">Custom Game Dev</h4>
+            <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.65;">End-to-end game production from GDD to launch day.</p>
+          </div>
+          <div style="text-align:center;padding:2rem 1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all var(--trans);" onmouseover="this.style.borderColor='var(--neon-cyan)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+            <div style="font-size:2.5rem;margin-bottom:1.25rem;">🚀</div>
+            <h4 style="font-family:var(--font-heading);font-size:1rem;font-weight:700;margin-bottom:0.75rem;">Console Porting</h4>
+            <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.65;">PS5, Xbox, Switch — certification-ready porting service.</p>
+          </div>
+          <div style="text-align:center;padding:2rem 1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all var(--trans);" onmouseover="this.style.borderColor='var(--neon-pink)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+            <div style="font-size:2.5rem;margin-bottom:1.25rem;">🎨</div>
+            <h4 style="font-family:var(--font-heading);font-size:1rem;font-weight:700;margin-bottom:0.75rem;">Art Production</h4>
+            <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.65;">2D/3D art, pixel sprites, UI/UX, VFX, and animation.</p>
+          </div>
+          <div style="text-align:center;padding:2rem 1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all var(--trans);" onmouseover="this.style.borderColor='var(--neon-green)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
+            <div style="font-size:2.5rem;margin-bottom:1.25rem;">🔊</div>
+            <h4 style="font-family:var(--font-heading);font-size:1rem;font-weight:700;margin-bottom:0.75rem;">Audio & Music</h4>
+            <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.65;">Original scores, dynamic audio systems, and SFX libraries.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         CAREERS HOME 2 (Open Roles table)
+         ============================================================== -->
+    <section class="section" id="careers2">
+      <div class="container">
+        <div class="grid-2 reveal" style="gap:4rem;align-items:center;">
+          <div>
+            <span class="section-eyebrow">// Join The Team</span>
+            <h2 class="section-heading">Level Up<br/>Your Career</h2>
+            <p class="section-subheading" style="margin-bottom:2rem;">We're a team of 120 obsessed creators. If you live and breathe games, you belong with us. Fully remote, fully flexible, fully creative.</p>
+            <a href="mailto:careers@pixelforge.studio" class="btn btn-primary btn-icon-right">
+              Apply Now <span class="btn-arrow">→</span>
+            </a>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <div style="display:flex;flex-direction:column;gap:0.75rem;">
+              <div style="display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:1rem;padding:1.1rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);">
+                <div>
+                  <div style="font-weight:600;font-size:0.95rem;">Senior Game Designer</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;">San Francisco / Remote</div>
+                </div>
+                <span class="tag">Full-time</span>
+                <a href="#" class="btn btn-ghost btn-sm">Apply →</a>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:1rem;padding:1.1rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);">
+                <div>
+                  <div style="font-weight:600;font-size:0.95rem;">Unreal Engine Developer</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;">Austin / Remote</div>
+                </div>
+                <span class="tag">Full-time</span>
+                <a href="#" class="btn btn-ghost btn-sm">Apply →</a>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:1rem;padding:1.1rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);">
+                <div>
+                  <div style="font-weight:600;font-size:0.95rem;">3D Environment Artist</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;">Remote</div>
+                </div>
+                <span class="tag">Full-time</span>
+                <a href="#" class="btn btn-ghost btn-sm">Apply →</a>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:1rem;padding:1.1rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);">
+                <div>
+                  <div style="font-weight:600;font-size:0.95rem;">Narrative Director</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;">San Francisco / Hybrid</div>
+                </div>
+                <span class="tag">Contract</span>
+                <a href="#" class="btn btn-ghost btn-sm">Apply →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         PROJECT ENQUIRY FORM
+         ============================================================== -->
+    <section class="section enquiry-section" id="contact2">
+      <div class="container">
+        <div class="enquiry-inner">
+          <div class="enquiry-info reveal">
+            <span class="section-eyebrow">// Project Enquiry</span>
+            <h2 class="section-heading">Tell Us About<br/>Your Game.</h2>
+            <p class="section-subheading">Share your vision and we'll send back a tailored proposal within 24 hours. No obligations, no generic pitches.</p>
+            <div class="enquiry-highlight">
+              <div class="enquiry-highlight-item">
+                <span class="enquiry-highlight-icon">🔒</span>
+                <span>Every enquiry is covered by a mutual NDA before we discuss details.</span>
+              </div>
+              <div class="enquiry-highlight-item">
+                <span class="enquiry-highlight-icon">⚡</span>
+                <span>Fast response: our creative leads review every brief within 24 hours.</span>
+              </div>
+              <div class="enquiry-highlight-item">
+                <span class="enquiry-highlight-icon">🎯</span>
+                <span>First concept session is always free — no strings, no pressure.</span>
+              </div>
+            </div>
+          </div>
+
+          <form class="enquiry-form reveal reveal-delay-1" id="enquiry-form" novalidate>
+            <h3 class="enquiry-form-header">Start Your Project</h3>
+            <p class="enquiry-form-sub">Fill in the brief below and we'll reach out to schedule a call.</p>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="eq-name">Your Name</label>
+                <input type="text" id="eq-name" name="name" placeholder="Alex Chen" required />
+              </div>
+              <div class="form-field">
+                <label for="eq-company">Company / Studio</label>
+                <input type="text" id="eq-company" name="company" placeholder="Indie Studio Inc." />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="eq-email">Email Address</label>
+              <input type="email" id="eq-email" name="email" placeholder="hello@yourstudio.com" required />
+            </div>
+
+            <div class="form-field">
+              <label for="eq-service">Service Required</label>
+              <select id="eq-service" name="service" required>
+                <option value="" disabled selected>Select a service</option>
+                <option value="custom">Custom Game Development</option>
+                <option value="porting">Console / Platform Porting</option>
+                <option value="art">Art & Asset Production</option>
+                <option value="audio">Audio & Music</option>
+                <option value="coop">Co-development / Live Ops</option>
+                <option value="other">Other / Not Sure Yet</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="eq-budget">Estimated Budget Range</label>
+              <select id="eq-budget" name="budget">
+                <option value="" disabled selected>Select budget range</option>
+                <option value="50k">$50k – $100k</option>
+                <option value="100k">$100k – $250k</option>
+                <option value="250k">$250k – $500k</option>
+                <option value="500k">$500k – $1M+</option>
+                <option value="discuss">Prefer to discuss</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="eq-brief">Project Brief</label>
+              <textarea id="eq-brief" name="brief" rows="5" placeholder="Tell us about your game concept, target platform, genre, and timeline..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full btn-icon-right">
+              Submit Project Brief <span class="btn-arrow">→</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         FINAL CTA — Home 2 (Retro Pixel Terminal Style)
+         ============================================================== -->
+    <section class="section final-cta2">
+      <div class="container">
+        <div class="final-cta2-inner">
+          <div class="final-cta2-pixel-art reveal">
+            <div class="pixel-border-box">
+              <div>> PLAYER_ONE: connected</div>
+              <div><span class="cyan">> STUDIO_STATUS: ONLINE</span></div>
+              <div>> PROJECTS_ACTIVE: 7</div>
+              <div><span class="green">> AWARDS_2026: 4 and counting</span></div>
+              <div><span class="pink">> NEXT_LAUNCH: Q1 2027</span></div>
+              <div>> OPEN_ROLES: 5 positions</div>
+              <div><span class="cyan">> your_game_here?: YES</span><span class="terminal-cursor"></span></div>
+            </div>
+          </div>
+
+          <div class="reveal reveal-delay-1">
+            <span class="section-eyebrow">// Ready to Ship?</span>
+            <h2 class="section-heading" style="font-size:clamp(2rem,4vw,3rem);">
+              Don't Let Your<br/>Game Collect Dust
+              <br/>in the Backlog.
+            </h2>
+            <p class="section-subheading" style="margin-bottom:2.5rem;">
+              The rarest resource in game development isn't talent or money — it's the right team. PixelForge is that team. Let's build something players talk about for years.
+            </p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <a href="mailto:hello@pixelforge.studio" class="btn btn-primary btn-lg btn-icon-right">
+                Initialize Project <span class="btn-arrow">→</span>
+              </a>
+              <a href="index.html" class="btn btn-ghost btn-lg">← View Home 1</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (same as Home 1) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <div class="logo-mark" style="width:32px;height:32px;">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="14" height="14" rx="3" fill="#b44dff"/>
+                <rect x="22" y="4" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.8"/>
+                <rect x="4" y="22" width="14" height="14" rx="3" fill="#00e5ff" opacity="0.6"/>
+                <rect x="22" y="22" width="14" height="14" rx="3" fill="#b44dff" opacity="0.5"/>
+              </svg>
+            </div>
+            <span class="logo-name">Pixel<span>Forge</span></span>
+          </a>
+          <p>A premium game development studio crafting bold, immersive experiences across every platform since 2018.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Twitter">𝕏</a>
+            <a href="#" class="social-btn" aria-label="Discord">🎮</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <a href="#about2">About Us</a>
+          <a href="#careers2">Careers</a>
+          <a href="#">Press Kit</a>
+          <a href="#">Partners</a>
+        </div>
+        <div class="footer-col">
+          <h4>Work</h4>
+          <a href="#cabinet">All Games</a>
+          <a href="#services2">Services</a>
+          <a href="#">Case Studies</a>
+          <a href="#">Awards</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@pixelforge.studio">hello@pixelforge.studio</a>
+          <a href="tel:+18005551234">+1 800 555 1234</a>
+          <a href="#">San Francisco, CA</a>
+          <a href="#">Austin, TX</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 PixelForge Game Studio. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+        <span class="footer-pixel-sig">Made with 8-bit love ❤️</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
