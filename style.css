@@ -1817,3 +1817,53 @@ input, select, textarea { font-family: inherit; }
   .hero2__headline { font-size: 1rem; }
   .container { padding: 0 1rem; }
 }
+
+/* =====================================================================
+   ICON SYSTEM — Lucide Icons
+   ===================================================================== */
+[data-lucide] {
+  display: inline-block;
+  vertical-align: middle;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.icon-xs  { width: 12px; height: 12px; }
+.icon-sm  { width: 16px; height: 16px; }
+.icon-md  { width: 20px; height: 20px; }
+.icon-lg  { width: 24px; height: 24px; }
+.icon-xl  { width: 32px; height: 32px; }
+.icon-2xl { width: 40px; height: 40px; }
+.icon-3xl { width: 48px; height: 48px; }
+.icon-4xl { width: 64px; height: 64px; }
+
+/* Contextual icon containers */
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb-pixel-art  [data-lucide] { width: 52px; height: 52px; opacity: 0.7; }
+.cabinet-pixel-art [data-lucide] { width: 44px; height: 44px; }
+.service-icon      [data-lucide] { width: 28px; height: 28px; }
+.award-icon        [data-lucide] { width: 26px; height: 26px; }
+.perk-card__icon   [data-lucide] { width: 26px; height: 26px; }
+.value-icon        [data-lucide] { width: 26px; height: 26px; }
+.pixel-stat-icon   [data-lucide] { width: 28px; height: 28px; }
+.contact-detail-icon [data-lucide] { width: 20px; height: 20px; }
+.office-flag       [data-lucide] { width: 22px; height: 22px; }
+.social-btn        [data-lucide] { width: 16px; height: 16px; }
+.team-card__photo  [data-lucide] { width: 56px; height: 56px; color: var(--text-muted); }
+.final-cta__icon   [data-lucide] { width: 40px; height: 40px; }
+.enquiry-highlight-icon [data-lucide] { width: 18px; height: 18px; }
+.service-detail__media-art [data-lucide] { width: 72px; height: 72px; opacity: 0.8; }
+.showcase-art [data-lucide] { width: 72px; height: 72px; }
+.culture-card__img [data-lucide] { width: 52px; height: 52px; color: var(--text-muted); }
+.dropdown-link-icon [data-lucide] { width: 18px; height: 18px; }
+.form-success__icon [data-lucide] { width: 48px; height: 48px; color: var(--neon-green); }
+.timeline-item [data-lucide] { width: 16px; height: 16px; }
