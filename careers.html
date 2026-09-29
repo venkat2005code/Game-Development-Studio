@@ -120,6 +120,14 @@
     [dir="rtl"] .job-card:hover { transform: translateX(-4px); }
     [dir="rtl"] .dept-btn { text-align: right; }
     [dir="rtl"] .dept-count { float: left; }
+    
+    .page-hero__bg {
+      background-image: linear-gradient(to bottom, rgba(10,10,12,0.2), rgba(10,10,12,0.8)), url('careers_hero.jpg');
+      background-size: cover; background-position: center; opacity: 1;
+    }
+    [data-theme="light"] .page-hero__bg {
+      background-image: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,1)), url('careers_hero.jpg');
+    }
   </style>
 </head>
 <body>
@@ -159,7 +167,7 @@
   <main>
     <!-- HERO -->
     <section class="page-hero">
-      <div class="page-hero__bg" style="background-image: linear-gradient(to bottom, rgba(10,10,12,0.2), rgba(10,10,12,0.8)), url('careers_hero.jpg'); background-size: cover; background-position: center; opacity: 1;"></div>
+      <div class="page-hero__bg"></div>
       <div class="page-hero__grid"></div>
       <div class="container page-hero__inner">
         <div class="reveal">
