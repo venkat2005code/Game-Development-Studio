@@ -768,6 +768,32 @@ input, select, textarea { font-family: inherit; }
   gap: 1.5rem;
 }
 
+}
+
+/* =====================================================================
+   ABOUT SECTION IMAGES
+   ===================================================================== */
+.about-images-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.about-images-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+.about-images-grid img:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 16/9;
+}
+.about-images-grid img:not(:first-child) {
+  aspect-ratio: 4/3;
+}
+
 .game-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -901,11 +927,24 @@ input, select, textarea { font-family: inherit; }
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 2.5rem 2rem;
   position: relative;
   overflow: hidden;
   transition: all var(--trans);
   cursor: default;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card__image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--border);
+}
+
+.service-card__content {
+  padding: 2rem;
+  flex-grow: 1;
 }
 
 .service-card::before {
@@ -929,14 +968,14 @@ input, select, textarea { font-family: inherit; }
 .service-card:hover::before { transform: scaleX(1); }
 
 .service-icon {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  margin-bottom: 1.75rem;
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
   background: var(--bg-subtle);
   border: 1px solid var(--border);
 }
