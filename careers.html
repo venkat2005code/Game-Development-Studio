@@ -12,23 +12,93 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     /* PAGE HERO */
-    .page-hero { padding: calc(var(--header-h) + 5rem) 0 5rem; position: relative; overflow: hidden; }
+    .page-hero {
+      min-height: calc(100vh - var(--header-h));
+      padding: calc(var(--header-h) + 2rem) 0 3rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
     .page-hero__bg {
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 20%, rgba(255,45,120,0.1) 0%, transparent 60%),
-                  radial-gradient(ellipse 50% 40% at 80% 80%, rgba(180,77,255,0.1) 0%, transparent 60%);
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(6, 6, 10, 0.96) 0%, rgba(6, 6, 10, 0.86) 45%, rgba(6, 6, 10, 0.35) 100%),
+        linear-gradient(to bottom, rgba(6, 6, 10, 0.6) 0%, transparent 35%, rgba(6, 6, 10, 0.95) 100%),
+        url('careers_hero.jpg');
+      background-size: cover;
+      background-position: center right;
+      opacity: 1;
+      transition: background-image var(--trans);
+    }
+    [data-theme="light"] .page-hero__bg {
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.90) 45%, rgba(255, 255, 255, 0.3) 100%),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 0%, transparent 35%, rgba(255, 255, 255, 0.98) 100%),
+        url('careers_hero.jpg');
     }
     .page-hero__grid {
       position: absolute; inset: 0;
       background-image: linear-gradient(rgba(255,45,120,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,45,120,0.03) 1px, transparent 1px);
       background-size: 60px 60px;
     }
-    .page-hero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 5rem; }
-    .page-hero__breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.5rem; }
-    .page-hero__breadcrumb a { color: var(--accent-2); }
-    .page-hero__title { font-family: var(--font-heading); font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
-    .page-hero__title .accent { background: linear-gradient(90deg, var(--neon-pink), var(--neon-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .page-hero__desc { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.75; max-width: 480px; margin-bottom: 2rem; }
+    .page-hero__inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3rem;
+      width: 100%;
+    }
+    .page-hero__breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .page-hero__breadcrumb a { color: var(--accent-1); font-weight: 600; }
+    [data-theme="light"] .section-eyebrow { color: var(--neon-pink); font-weight: 700; }
+    .page-hero__title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 4.2vw, 4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+    [data-theme="dark"] .page-hero__title {
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+    }
+    [data-theme="light"] .page-hero__title {
+      color: #0b0b14;
+      text-shadow: none;
+    }
+    .page-hero__title .accent {
+      display: inline-block;
+      color: var(--neon-pink);
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none !important;
+    }
+    [data-theme="light"] .page-hero__title .accent {
+      color: #b80048;
+      background: linear-gradient(90deg, #b80048 0%, #6815cb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none !important;
+    }
+    .page-hero__desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 1.75rem;
+    }
+    [data-theme="light"] .page-hero__desc {
+      color: #3e3e56;
+      font-weight: 450;
+    }
 
     /* PERKS */
     .perks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
@@ -104,7 +174,11 @@
     }
     .apply-form { display: flex; flex-direction: column; gap: 1rem; }
 
-    @media (max-width: 1024px) { .perks-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 1024px) {
+      .page-hero { min-height: auto; padding: calc(var(--header-h) + 2.5rem) 0 3rem; }
+      .page-hero__inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .perks-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
       .page-hero__inner { grid-template-columns: 1fr; }
       .jobs-layout { grid-template-columns: 1fr; }
@@ -117,18 +191,24 @@
       .perks-grid { grid-template-columns: 1fr 1fr; }
     }
     [dir="rtl"] .page-hero__inner { direction: rtl; }
+    [dir="rtl"] .page-hero__bg {
+      background-image:
+        linear-gradient(to left, rgba(6, 6, 10, 0.96) 0%, rgba(6, 6, 10, 0.86) 45%, rgba(6, 6, 10, 0.35) 100%),
+        linear-gradient(to bottom, rgba(6, 6, 10, 0.6) 0%, transparent 35%, rgba(6, 6, 10, 0.95) 100%),
+        url('careers_hero.jpg');
+      background-position: center left;
+    }
+    [dir="rtl"][data-theme="light"] .page-hero__bg {
+      background-image:
+        linear-gradient(to left, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.90) 45%, rgba(255, 255, 255, 0.3) 100%),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 0%, transparent 35%, rgba(255, 255, 255, 0.98) 100%),
+        url('careers_hero.jpg');
+      background-position: center left;
+    }
     [dir="rtl"] .jobs-layout { direction: rtl; }
     [dir="rtl"] .job-card:hover { transform: translateX(-4px); }
     [dir="rtl"] .dept-btn { text-align: right; }
     [dir="rtl"] .dept-count { float: left; }
-    
-    .page-hero__bg {
-      background-image: linear-gradient(to bottom, rgba(10,10,12,0.2), rgba(10,10,12,0.8)), url('careers_hero.jpg');
-      background-size: cover; background-position: center; opacity: 1;
-    }
-    [data-theme="light"] .page-hero__bg {
-      background-image: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,1)), url('careers_hero.jpg');
-    }
   </style>
 </head>
 <body>
@@ -181,16 +261,16 @@
             <a href="#apply" class="btn btn-ghost">Send Open Application</a>
           </div>
         </div>
-        <div class="reveal reveal-delay-2" style="grid-column: 1 / -1; margin-top: 2rem;">
-          <div style="background:var(--bg-card);border:1px solid var(--border-strong);border-radius:var(--radius-xl);padding:2rem;box-shadow:var(--shadow-card),var(--glow-pink);">
-            <p style="font-family:var(--font-pixel);font-size:0.5rem;color:var(--neon-pink);margin-bottom:1.25rem;letter-spacing:0.1em;">// WHY PIXELFORGE</p>
-            <div style="display:flex;flex-direction:column;gap:0.75rem;">
-              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="globe" style="width:20px;height:20px;flex-shrink:0;"></i><span style="font-size:0.9rem;color:var(--text-secondary);">100% Remote-friendly across all roles</span></div>
-              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="banknote" style="width:20px;height:20px;flex-shrink:0;"></i><span style="font-size:0.9rem;color:var(--text-secondary);">Competitive compensation + profit sharing</span></div>
-              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="gamepad-2" style="width:20px;height:20px;flex-shrink:0;"></i><span style="font-size:0.9rem;color:var(--text-secondary);">Work on titles you'll be proud to credit</span></div>
-              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="graduation-cap" style="width:20px;height:20px;flex-shrink:0;"></i><span style="font-size:0.9rem;color:var(--text-secondary);">$3,000/yr learning & development budget</span></div>
-              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="heart-pulse" style="width:20px;height:20px;flex-shrink:0;"></i><span style="font-size:0.9rem;color:var(--text-secondary);">Full health, dental, and vision coverage</span></div>
-              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="gift" style="width:20px;height:20px;flex-shrink:0;"></i><span style="font-size:0.9rem;color:var(--text-secondary);">Game launch bonuses for shipped titles</span></div>
+        <div class="reveal reveal-delay-2">
+          <div style="background:var(--bg-card);border:1px solid var(--border-strong);border-radius:var(--radius-xl);padding:2rem 2.25rem;box-shadow:var(--shadow-card),var(--glow-pink);backdrop-filter:blur(16px);">
+            <p style="font-family:var(--font-pixel);font-size:0.55rem;color:var(--neon-pink);margin-bottom:1.25rem;letter-spacing:0.12em;text-transform:uppercase;">// Why PixelForge</p>
+            <div style="display:flex;flex-direction:column;gap:0.85rem;">
+              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="globe" style="width:18px;height:18px;flex-shrink:0;color:var(--neon-cyan);"></i><span style="font-size:0.92rem;color:var(--text-secondary);font-weight:500;">100% Remote-friendly across all roles</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="banknote" style="width:18px;height:18px;flex-shrink:0;color:var(--neon-green);"></i><span style="font-size:0.92rem;color:var(--text-secondary);font-weight:500;">Competitive compensation + profit sharing</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="gamepad-2" style="width:18px;height:18px;flex-shrink:0;color:var(--neon-violet);"></i><span style="font-size:0.92rem;color:var(--text-secondary);font-weight:500;">Work on titles you'll be proud to credit</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="graduation-cap" style="width:18px;height:18px;flex-shrink:0;color:var(--neon-pink);"></i><span style="font-size:0.92rem;color:var(--text-secondary);font-weight:500;">$3,000/yr learning & development budget</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="heart-pulse" style="width:18px;height:18px;flex-shrink:0;color:var(--neon-pink);"></i><span style="font-size:0.92rem;color:var(--text-secondary);font-weight:500;">Full health, dental, and vision coverage</span></div>
+              <div style="display:flex;align-items:center;gap:0.75rem;"><i data-lucide="gift" style="width:18px;height:18px;flex-shrink:0;color:var(--neon-cyan);"></i><span style="font-size:0.92rem;color:var(--text-secondary);font-weight:500;">Game launch bonuses for shipped titles</span></div>
             </div>
           </div>
         </div>

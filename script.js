@@ -149,6 +149,13 @@
   const mainNav   = document.querySelector('.main-nav');
 
   if (hamburger && mainNav) {
+    if (!mainNav.querySelector('.mobile-nav-cta')) {
+      const mobileCta = document.createElement('div');
+      mobileCta.className = 'nav-item mobile-nav-cta';
+      mobileCta.innerHTML = '<a href="contact.html" class="btn btn-primary btn-sm btn-icon-right" style="width:100%; justify-content:center; margin-top:0.6rem;">Start a Project <span class="btn-arrow">→</span></a>';
+      mainNav.appendChild(mobileCta);
+    }
+
     hamburger.addEventListener('click', () => {
       const isOpen = mainNav.style.display === 'flex';
       if (isOpen) {
@@ -173,5 +180,38 @@
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();
   }
+
+  /* -----------------------------------------------------------------------
+     10. NAV DROPDOWN ACCESSIBILITY (Click & Touch Toggle)
+  ----------------------------------------------------------------------- */
+  const dropdownItems = document.querySelectorAll('.nav-item.dropdown');
+
+  dropdownItems.forEach((dropdown) => {
+    const trigger = dropdown.querySelector('.nav-link');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = dropdown.classList.contains('open');
+      dropdownItems.forEach((d) => d.classList.remove('open'));
+      if (!isOpen) {
+        dropdown.classList.add('open');
+      }
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item.dropdown')) {
+      dropdownItems.forEach((d) => d.classList.remove('open'));
+    }
+  });
+
+  // Close dropdown on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdownItems.forEach((d) => d.classList.remove('open'));
+    }
+  });
 
 })();
